@@ -7,6 +7,7 @@ Demo	-> htp://www.lesterchan.net/blogs/wp-print.php?p=647
 Updated	-> 1st January 2006
 --------------------------------------------------
 
+
 // Version 2.01 (01-01-2006)
 - NEW: Compatible With WordPress 2.0
 - NEW: Automatically Detect Whether You Are Using Nice Permalink
