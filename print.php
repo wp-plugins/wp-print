@@ -3,7 +3,7 @@
 Plugin Name: WP-Print
 Plugin URI: http://www.lesterchan.net/portfolio/programming.php
 Description: Displays A Printable Version Of Your WordPress Weblog Post.
-Version: 2.01
+Version: 2.02
 Author: GaMerZ
 Author URI: http://www.lesterchan.net
 */
@@ -74,31 +74,36 @@ function print_link($text_post = 'Print This Post', $text_page = 'Print This Pag
 
 ### Function: Print Content
 function print_content($display = true) {
-	global $links_text, $link_number, $pages, $multipage, $numpages;
-	if($multipage) {
-		for($page = 0; $page < $numpages; $page++) {
-			$content .= $pages[$page];
-		}
+	global $links_text, $link_number, $pages, $multipage, $numpages, $post;
+	if (!empty($post->post_password) && stripslashes($_COOKIE['wp-postpass_'.COOKIEHASH]) != $post->post_password) {
+		$content = get_the_password_form();
 	} else {
-		$content = $pages[0];
-	}
-	$content = wptexturize($content);
-	$content = convert_smilies($content);
-	$content = convert_chars($content);
-	$content = wpautop($content);
-	$content = str_replace(']]>', ']]&gt;', $content);
-	preg_match_all('/<a(.+?)href=\"(.+?)\"(.*?)>(.+?)<\/a>/', $content, $matches);
-	for ($i=0; $i < count($matches[0]); $i++) {
-		$link_match = $matches[0][$i];
-		$link_number++;
-		$link_url = $matches[2][$i];
-		$link_url = (strtolower(substr($link_url,0,7)) != 'http://') ? get_settings('home') . $link_url : $link_url;
-		$link_text = $matches[4][$i];
-		$content = str_replace($link_match, '['.$link_number."] <a href=\"$link_url\" target=\"_blank\">".$link_text.'</a>', $content);
-		if(preg_match('/<img(.+?)src=\"(.+?)\"(.*?)>/',$link_text)) {
-			$links_text .= '<br />['.$link_number.'] '.__('Image').': <b>'.$link_url.'</b>';
+		if($multipage) {
+			for($page = 0; $page < $numpages; $page++) {
+				$content .= $pages[$page];
+			}
 		} else {
-			$links_text .= '<br />['.$link_number.'] '.$link_text.': <b>'.$link_url.'</b>';
+			$content = $pages[0];
+		}
+		$content = wptexturize($content);
+		$content = convert_smilies($content);
+		$content = convert_chars($content);
+		$content = wpautop($content);
+		$content = apply_filters('the_content', $content);
+		$content = str_replace(']]>', ']]&gt;', $content);
+		preg_match_all('/<a(.+?)href=\"(.+?)\"(.*?)>(.+?)<\/a>/', $content, $matches);
+		for ($i=0; $i < count($matches[0]); $i++) {
+			$link_match = $matches[0][$i];
+			$link_number++;
+			$link_url = $matches[2][$i];
+			$link_url = (strtolower(substr($link_url,0,7)) != 'http://') ? get_settings('home') . $link_url : $link_url;
+			$link_text = $matches[4][$i];
+			$content = str_replace($link_match, '['.$link_number."] <a href=\"$link_url\" target=\"_blank\">".$link_text.'</a>', $content);
+			if(preg_match('/<img(.+?)src=\"(.+?)\"(.*?)>/',$link_text)) {
+				$links_text .= '<br />['.$link_number.'] '.__('Image').': <b>'.$link_url.'</b>';
+			} else {
+				$links_text .= '<br />['.$link_number.'] '.$link_text.': <b>'.$link_url.'</b>';
+			}
 		}
 	}
 	if($display) {
