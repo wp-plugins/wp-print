@@ -3,7 +3,7 @@
 Plugin Name: WP-Print
 Plugin URI: http://www.lesterchan.net/portfolio/programming.php
 Description: Displays A Printable Version Of Your WordPress Weblog Post.
-Version: 2.02
+Version: 2.03
 Author: GaMerZ
 Author URI: http://www.lesterchan.net
 */
@@ -64,9 +64,35 @@ function print_link($text_post = 'Print This Post', $text_page = 'Print This Pag
 		}
 	} else {
 		if(is_page()) {
-			echo '<a href="'.get_settings('home').'/wp-print.php?page_id='.$id.'">'.$text_page.'</a>';
+			echo '<a href="'.get_settings('siteurl').'/wp-print.php?page_id='.$id.'">'.$text_page.'</a>';
 		} else {
-			echo '<a href="'.get_settings('home').'/wp-print.php?p='.$id.'">'.$text_post.'</a>';
+			echo '<a href="'.get_settings('siteurl').'/wp-print.php?p='.$id.'">'.$text_post.'</a>';
+		}
+	}
+}
+
+
+### Function: Display Print Image Link
+function print_link_image() {
+	global $id;
+	$using_permalink = get_settings('permalink_structure');
+	$permalink = get_permalink();
+	if(file_exists(ABSPATH.'/wp-content/plugins/print/images/print.gif')) {
+		$print_image = '<img src="'.get_settings('siteurl').'/wp-content/plugins/print/images/print.gif" alt="Print This Post/Page" />';
+	} else {
+		$print_image = 'Print';
+	}
+	if(!empty($using_permalink)) {
+		if(is_page()) {
+			echo '<a href="'.$permalink.'printpage/">'.$print_image.'</a>';
+		} else {
+			echo '<a href="'.$permalink.'print/">'.$print_image.'</a>';
+		}
+	} else {
+		if(is_page()) {
+			echo '<a href="'.get_settings('siteurl').'/wp-print.php?page_id='.$id.'">'.$print_image.'</a>';
+		} else {
+			echo '<a href="'.get_settings('siteurl').'/wp-print.php?p='.$id.'">'.$print_image.'</a>';
 		}
 	}
 }

@@ -4,7 +4,7 @@
 
 Put:
 ------------------------------------------------------------------
-print.php
+Folder: print
 ------------------------------------------------------------------
 
 
@@ -40,4 +40,7 @@ Note:
 The first value you pass in is the text for printing post.
 The second value is the text for printing page.
 Default: print_link('Print This Post', 'Print This Page')
+
+If you want to use an image/icon instead, replace print_link() 
+with print_link_image()
 ------------------------------------------------------------------

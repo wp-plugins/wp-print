@@ -6,9 +6,11 @@ Website		-> http://www.lesterchan.net/
 Demo		-> htp://www.lesterchan.net/blogs/wp-print.php?p=647
 Documentation	-> http://dev.wp-plugins.org/wiki/wp-print
 Development	-> http://dev.wp-plugins.org/browser/wp-print/
-Updated		-> 1st February 2006
+Updated		-> 1st March 2006
 --------------------------------------------------
 
+// Version 2.03 (01-03-2006)
+- NEW: Added Print Image With print_link_image()
 
 // Version 2.02 (01-02-2006)
 - FIXED: Able To View Password Protected Blog
