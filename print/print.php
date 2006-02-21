@@ -101,6 +101,7 @@ function print_link_image() {
 ### Function: Print Content
 function print_content($display = true) {
 	global $links_text, $link_number, $pages, $multipage, $numpages, $post;
+	$max_url_char = 100;
 	if (!empty($post->post_password) && stripslashes($_COOKIE['wp-postpass_'.COOKIEHASH]) != $post->post_password) {
 		$content = get_the_password_form();
 	} else {
@@ -125,6 +126,9 @@ function print_content($display = true) {
 			$link_url = (strtolower(substr($link_url,0,7)) != 'http://') ? get_settings('home') . $link_url : $link_url;
 			$link_text = $matches[4][$i];
 			$content = str_replace($link_match, '['.$link_number."] <a href=\"$link_url\" target=\"_blank\">".$link_text.'</a>', $content);
+			if(strlen($link_url) > $max_url_char) {
+				$link_url = substr($link_url, 0, $max_url_char).'<br />'.substr($link_url, $max_url_char, strlen($link_url));
+			}
 			if(preg_match('/<img(.+?)src=\"(.+?)\"(.*?)>/',$link_text)) {
 				$links_text .= '<br />['.$link_number.'] '.__('Image').': <b>'.$link_url.'</b>';
 			} else {

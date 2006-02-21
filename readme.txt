@@ -11,6 +11,7 @@ Updated		-> 1st March 2006
 
 // Version 2.03 (01-03-2006)
 - NEW: Added Print Image With print_link_image()
+- NEW: Automatically Break To Next Line If Link Contains More Than 100 Chars
 
 // Version 2.02 (01-02-2006)
 - FIXED: Able To View Password Protected Blog
