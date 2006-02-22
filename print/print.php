@@ -102,7 +102,7 @@ function print_link_image() {
 function print_content($display = true) {
 	global $links_text, $link_number, $pages, $multipage, $numpages, $post;
 	$max_url_char = 100;
-	if (!empty($post->post_password) && stripslashes($_COOKIE['wp-postpass_'.COOKIEHASH]) != $post->post_password) {
+	if(!empty($post->post_password) && stripslashes($_COOKIE['wp-postpass_'.COOKIEHASH]) != $post->post_password) {
 		$content = get_the_password_form();
 	} else {
 		if($multipage) {
@@ -140,6 +140,30 @@ function print_content($display = true) {
 		echo $content;
 	} else {
 		return $content;
+	}
+}
+
+
+### Function: Print Comments
+function print_comments($link = true) {
+	global $post;
+	$comment_text = '';
+	$num_comments = get_comments_number();
+	if($num_comments == 0) {
+		$comment_text = __('No Comments');
+	} elseif($num_comments == 1) {
+		$comment_text = __('1 Comment');
+	} else {
+		$comment_text = __($num_comments.' Comments');
+	}
+	if(!empty($post->post_password) && stripslashes($_COOKIE['wp-postpass_'.COOKIEHASH]) != $post->post_password) {
+		_e('Comments Hidden');
+	} else {
+		if($link) {
+			echo '<a href="'.get_comments_link().'">'.$comment_text.'</a>';
+		} else {
+			echo $comment_text;
+		}
 	}
 }
 

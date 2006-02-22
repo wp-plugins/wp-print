@@ -80,7 +80,7 @@ HR#Divider {
 		<?php if (have_posts()) : ?>
 			<?php while (have_posts()) : the_post(); ?>
 					<p id="BlogTitle"><?php the_title(); ?></p>
-					<p id="BlogDate">Posted By <?php the_author(); ?> On <?php the_time('jS F Y @ H:i'); ?> In <?php the_category(', '); ?> | <a href="<?php comments_link(); ?>"><?php comments_number(); ?></a></p>
+					<p id="BlogDate">Posted By <?php the_author(); ?> On <?php the_time('jS F Y @ H:i'); ?> In <?php the_category(', '); ?> | <?php print_comments(); ?></p>
 					<div id="BlogContent"><?php print_content(); ?></div>
 			<?php endwhile; ?>
 			<hr id="Divider" align="center" />
