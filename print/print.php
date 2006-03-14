@@ -112,10 +112,6 @@ function print_content($display = true) {
 		} else {
 			$content = $pages[0];
 		}
-		$content = wptexturize($content);
-		$content = convert_smilies($content);
-		$content = convert_chars($content);
-		$content = wpautop($content);
 		$content = apply_filters('the_content', $content);
 		$content = str_replace(']]>', ']]&gt;', $content);
 		preg_match_all('/<a(.+?)href=\"(.+?)\"(.*?)>(.+?)<\/a>/', $content, $matches);
