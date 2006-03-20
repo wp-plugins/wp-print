@@ -6,8 +6,14 @@ Website		-> http://www.lesterchan.net/
 Demo		-> htp://www.lesterchan.net/blogs/wp-print.php?p=647
 Documentation	-> http://dev.wp-plugins.org/wiki/wp-print
 Development	-> http://dev.wp-plugins.org/browser/wp-print/
-Updated		-> 1st March 2006
+Updated		-> 1st April 2006
 --------------------------------------------------
+
+
+// Version 2.04 (01-04-2006)
+- NEW: Able To Print Comments Together With Post Using $can_print_comments In wp-print.php
+- NEW: Moved wp-print.php To Plugin Folder
+- FIXED: Removed Link From Post Comment Count And Post Category
 
 // Version 2.03 (01-03-2006)
 - NEW: Added Print Image With print_link_image()

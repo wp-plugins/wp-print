@@ -3,13 +3,13 @@
 Plugin Name: WP-Print
 Plugin URI: http://www.lesterchan.net/portfolio/programming.php
 Description: Displays A Printable Version Of Your WordPress Weblog Post.
-Version: 2.03
+Version: 2.04
 Author: GaMerZ
 Author URI: http://www.lesterchan.net
 */
 
 
-/*  Copyright 2005  Lester Chan  (email : gamerz84@hotmail.com)
+/*  Copyright 2006  Lester Chan  (email : gamerz84@hotmail.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -58,16 +58,12 @@ function print_link($text_post = 'Print This Post', $text_page = 'Print This Pag
 	$permalink = get_permalink();
 	if(!empty($using_permalink)) {
 		if(is_page()) {
-			echo '<a href="'.$permalink.'printpage/">'.$text_page.'</a>';
+			echo '<a href="'.$permalink.'printpage/" title="'.$text_page.'">'.$text_page.'</a>';
 		} else {
-			echo '<a href="'.$permalink.'print/">'.$text_post.'</a>';
+			echo '<a href="'.$permalink.'print/" title="'.$test_post.'">'.$text_post.'</a>';
 		}
 	} else {
-		if(is_page()) {
-			echo '<a href="'.get_settings('siteurl').'/wp-print.php?page_id='.$id.'">'.$text_page.'</a>';
-		} else {
-			echo '<a href="'.get_settings('siteurl').'/wp-print.php?p='.$id.'">'.$text_post.'</a>';
-		}
+		echo '<a href="'.$permalink.'&amp;print=1" title="'.$text_post.'">'.$text_post.'</a>';
 	}
 }
 
@@ -84,16 +80,12 @@ function print_link_image() {
 	}
 	if(!empty($using_permalink)) {
 		if(is_page()) {
-			echo '<a href="'.$permalink.'printpage/">'.$print_image.'</a>';
+			echo '<a href="'.$permalink.'printpage/" title="Print This Page">'.$print_image.'</a>';
 		} else {
-			echo '<a href="'.$permalink.'print/">'.$print_image.'</a>';
+			echo '<a href="'.$permalink.'print/" title="Print This Post">'.$print_image.'</a>';
 		}
 	} else {
-		if(is_page()) {
-			echo '<a href="'.get_settings('siteurl').'/wp-print.php?page_id='.$id.'">'.$print_image.'</a>';
-		} else {
-			echo '<a href="'.get_settings('siteurl').'/wp-print.php?p='.$id.'">'.$print_image.'</a>';
-		}
+		echo '<a href="'.$permalink.'&amp;print=1" title="Print This Post/Page">'.$print_image.'</a>';
 	}
 }
 
@@ -112,6 +104,10 @@ function print_content($display = true) {
 		} else {
 			$content = $pages[0];
 		}
+		$content = wptexturize($content);
+		$content = convert_smilies($content);
+		$content = convert_chars($content);
+		$content = wpautop($content);
 		$content = apply_filters('the_content', $content);
 		$content = str_replace(']]>', ']]&gt;', $content);
 		preg_match_all('/<a(.+?)href=\"(.+?)\"(.*?)>(.+?)<\/a>/', $content, $matches);
@@ -140,26 +136,66 @@ function print_content($display = true) {
 }
 
 
+### Function: Print Categories
+function print_categories($before = '', $after = '') {
+	$temp_cat = strip_tags(get_the_category_list(',' , $parents));
+	$temp_cat = explode(', ', $temp_cat);
+	$temp_cat = implode($after.', '.$before, $temp_cat);
+	echo $before.$temp_cat.$after;
+}
+
+
+### Function: Print Comments Content
+function print_comments_content($display = true) {
+	global $links_text, $link_number;
+	$max_url_char = 100;
+	$content  = get_comment_text();
+	preg_match_all('/<a(.+?)href=\"(.+?)\"(.*?)>(.+?)<\/a>/', $content, $matches);
+	for ($i=0; $i < count($matches[0]); $i++) {
+		$link_match = $matches[0][$i];
+		$link_number++;
+		$link_url = $matches[2][$i];
+		$link_url = (strtolower(substr($link_url,0,7)) != 'http://') ? get_settings('home') . $link_url : $link_url;
+		$link_text = $matches[4][$i];
+		$content = str_replace($link_match, '['.$link_number."] <a href=\"$link_url\" target=\"_blank\">".$link_text.'</a>', $content);
+		if(strlen($link_url) > $max_url_char) {
+			$link_url = substr($link_url, 0, $max_url_char).'<br />'.substr($link_url, $max_url_char, strlen($link_url));
+		}
+		if(preg_match('/<img(.+?)src=\"(.+?)\"(.*?)>/',$link_text)) {
+			$links_text .= '<br />['.$link_number.'] '.__('Image').': <b>'.$link_url.'</b>';
+		} else {
+			$links_text .= '<br />['.$link_number.'] '.$link_text.': <b>'.$link_url.'</b>';
+		}
+	}
+	if($display) {
+		echo $content;
+	} else {
+		return $content;
+	}
+}
+
+
 ### Function: Print Comments
-function print_comments($link = true) {
+function print_comments_number() {
 	global $post;
 	$comment_text = '';
-	$num_comments = get_comments_number();
-	if($num_comments == 0) {
-		$comment_text = __('No Comments');
-	} elseif($num_comments == 1) {
-		$comment_text = __('1 Comment');
+	$comment_status = $post->comment_status;
+	if($comment_status == 'open') {
+		$num_comments = get_comments_number();
+		if($num_comments == 0) {
+			$comment_text = __('No Comments');
+		} elseif($num_comments == 1) {
+			$comment_text = __('1 Comment');
+		} else {
+			$comment_text = __($num_comments.' Comments');
+		}
 	} else {
-		$comment_text = __($num_comments.' Comments');
+		$comment_text = __('Comments Disabled');
 	}
 	if(!empty($post->post_password) && stripslashes($_COOKIE['wp-postpass_'.COOKIEHASH]) != $post->post_password) {
 		_e('Comments Hidden');
 	} else {
-		if($link) {
-			echo '<a href="'.get_comments_link().'">'.$comment_text.'</a>';
-		} else {
-			echo $comment_text;
-		}
+		echo $comment_text;
 	}
 }
 
@@ -177,8 +213,21 @@ function print_links($text_links = 'URLs in this post:') {
 add_action('template_redirect', 'wp_print');
 function wp_print() {
 	if(intval(get_query_var('print')) == 1) {
-		include(ABSPATH . '/wp-print.php');
+		include(ABSPATH.'wp-content/plugins/print/wp-print.php');
 		exit;
 	}
+}
+
+
+### Function: Add Print Comments Template
+function print_template_comments($file = '') {
+	$file = ABSPATH.'wp-content/plugins/print/wp-print-comments.php';
+	return $file;
+}
+
+
+### Function: Print Page Title
+function print_pagetitle($print_pagetitle) {
+	return '&raquo; Print'.$print_pagetitle;
 }
 ?>
