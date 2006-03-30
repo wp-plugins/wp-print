@@ -1,4 +1,31 @@
--> Upgrade Instructions For Version 1.0x To Version 2.03
+-> Upgrade Instructions For Version 2.03 To Version 2.04
+------------------------------------------------------------------
+// Deactivate WP-Print plugin
+
+
+// Open wp-content/plugins folder
+
+Overwrite:
+------------------------------------------------------------------
+Folder: print
+------------------------------------------------------------------
+
+
+// Open root Wordpress folder
+
+Delete:
+------------------------------------------------------------------
+wp-print.php
+------------------------------------------------------------------
+
+
+// Activate WP-Print plugin
+
+
+
+
+
+-> Upgrade Instructions For Version 1.0x To Version 2.04
 ------------------------------------------------------------------
 // Deactivate WP-Print plugin
 
@@ -18,7 +45,7 @@ Folder: print
 
 // Open root Wordpress folder
 
-Overwrite:
+Delete:
 ------------------------------------------------------------------
 wp-print.php
 ------------------------------------------------------------------

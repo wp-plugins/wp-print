@@ -8,14 +8,6 @@ Folder: print
 ------------------------------------------------------------------
 
 
-// Open root Wordpress folder
-
-Put:
-------------------------------------------------------------------
-wp-print.php
-------------------------------------------------------------------
-
-
 // Activate WP-Print plugin
 
 Note: 
@@ -43,4 +35,16 @@ Default: print_link('Print This Post', 'Print This Page')
 
 If you want to use an image/icon instead, replace print_link() 
 with print_link_image()
+------------------------------------------------------------------
+
+
+// To Print Comments Together With Post
+
+Open wp-content/plugins/print/wp-print.php, Find:
+------------------------------------------------------------------
+$can_print_comments = false;
+------------------------------------------------------------------
+Replace
+------------------------------------------------------------------
+$can_print_comments = true;
 ------------------------------------------------------------------

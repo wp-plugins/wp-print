@@ -10,8 +10,8 @@
 |	- http://www.lesterchan.net													|
 |																							|
 |	File Information:																	|
-|	- Printer Friendly Page For Comments															|
-|	- wp-print-comments.php																	|
+|	- Printer Friendly Page For Comments										|
+|	- wp-print-comments.php														|
 |																							|
 +----------------------------------------------------------------+
 */
