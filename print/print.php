@@ -60,7 +60,7 @@ function print_link($text_post = 'Print This Post', $text_page = 'Print This Pag
 		if(is_page()) {
 			echo '<a href="'.$permalink.'printpage/" title="'.$text_page.'">'.$text_page.'</a>';
 		} else {
-			echo '<a href="'.$permalink.'print/" title="'.$test_post.'">'.$text_post.'</a>';
+			echo '<a href="'.$permalink.'print/" title="'.$text_post.'">'.$text_post.'</a>';
 		}
 	} else {
 		echo '<a href="'.$permalink.'&amp;print=1" title="'.$text_post.'">'.$text_post.'</a>';
