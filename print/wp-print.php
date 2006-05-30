@@ -2,7 +2,7 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.0 Plugin: WP-Print 2.04										|
+|	WordPress 2.0 Plugin: WP-Print 2.05										|
 |	Copyright (c) 2005 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
@@ -18,7 +18,6 @@
 
 
 ### Variables
-$can_print_comments = false;
 $links_text = '';
 
 ### Actions
@@ -60,7 +59,7 @@ Body {
 	padding: 10px;
 	margin-top: 10px;
 }
-HR#Divider {
+HR.Divider {
 	width: 80%; 
 	height: 1px; 
 	color: #000000;
@@ -75,8 +74,7 @@ HR#Divider {
 	margin-bottom: 10px;
 }
 .CommentContent {
-	padding: 10px;
-	margin-top: 10px;
+	padding: 2px 10px 10px 10px;
 }
 </style>
 </head>
@@ -90,12 +88,16 @@ HR#Divider {
 					<p id="BlogDate">Posted By <u><?php the_author(); ?></u> On <?php the_time('jS F Y @ H:i'); ?> In <?php print_categories('<u>', '</u>'); ?> | <u><?php print_comments_number(); ?></u></p>
 					<div id="BlogContent"><?php print_content(); ?></div>
 			<?php endwhile; ?>
-			<hr id="Divider" align="center" />
-			<?php if($can_print_comments) { comments_template(); } ?>
+			<hr class="Divider" align="center" />
+			<?php if(print_can('comments')): ?>
+				<?php comments_template(); ?>
+			<?php endif; ?>
 			<p align="left">Article printed from <?php bloginfo('name'); ?>: <b><?php bloginfo('url'); ?></b></p>
 			<p align="left">URL to article: <b><?php the_permalink(); ?></b></p>
-			<p align="left"><?php print_links(); ?></p>
-			<p align="right">Click <a href="javascript:window.print();">here</a> to print.</p>
+			<?php if(print_can('links')): ?>
+				<p align="left"><?php print_links(); ?></p>
+			<?php endif; ?>
+			<p align="right">Click <a href="#Print" onclick="window.print(); return false;" title="Click here to print.">here</a> to print.</p>
 		<?php else: ?>
 				<p align="center">No posts matched your criteria.</p>
 		<?php endif; ?>
