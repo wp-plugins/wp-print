@@ -3,7 +3,7 @@
 Plugin Name: WP-Print
 Plugin URI: http://www.lesterchan.net/portfolio/programming.php
 Description: Displays A Printable Version Of Your WordPress Weblog Post.
-Version: 2.05
+Version: 2.06
 Author: GaMerZ
 Author URI: http://www.lesterchan.net
 */
@@ -127,9 +127,7 @@ function print_content($display = true) {
 				$link_url = (strtolower(substr($link_url,0,7)) != 'http://') ? get_settings('home') . $link_url : $link_url;
 				$link_text = $matches[4][$i];
 				$content = str_replace($link_match, '['.$link_number."] <a href=\"$link_url\" target=\"_blank\">".$link_text.'</a>', $content);
-				if(strlen($link_url) > $max_url_char) {
-					$link_url = substr($link_url, 0, $max_url_char).'<br />'.substr($link_url, $max_url_char, strlen($link_url));
-				}
+				$link_url = chunk_split($link_url, 100, "<br />\n");
 				if(preg_match('/<img(.+?)src=\"(.+?)\"(.*?)>/',$link_text)) {
 					$links_text .= '<br />['.$link_number.'] '.__('Image').': <b>'.$link_url.'</b>';
 				} else {
@@ -158,7 +156,6 @@ function print_categories($before = '', $after = '') {
 ### Function: Print Comments Content
 function print_comments_content($display = true) {
 	global $links_text, $link_number;
-	$max_url_char = 100;	
 	$content  = get_comment_text();
 	$content = apply_filters('comment_text', $content);
 	if(!print_can('images')) {
@@ -173,9 +170,7 @@ function print_comments_content($display = true) {
 			$link_url = (strtolower(substr($link_url,0,7)) != 'http://') ? get_settings('home') . $link_url : $link_url;
 			$link_text = $matches[4][$i];
 			$content = str_replace($link_match, '['.$link_number."] <a href=\"$link_url\" target=\"_blank\">".$link_text.'</a>', $content);
-			if(strlen($link_url) > $max_url_char) {
-				$link_url = substr($link_url, 0, $max_url_char).'<br />'.substr($link_url, $max_url_char, strlen($link_url));
-			}
+			$link_url = chunk_split($link_url, 100, "<br />\n");
 			if(preg_match('/<img(.+?)src=\"(.+?)\"(.*?)>/',$link_text)) {
 				$links_text .= '<br />['.$link_number.'] '.__('Image').': <b>'.$link_url.'</b>';
 			} else {
