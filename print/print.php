@@ -3,7 +3,7 @@
 Plugin Name: WP-Print
 Plugin URI: http://www.lesterchan.net/portfolio/programming.php
 Description: Displays A Printable Version Of Your WordPress Weblog Post.
-Version: 2.06
+Version: 2.05
 Author: GaMerZ
 Author URI: http://www.lesterchan.net
 */
@@ -43,10 +43,12 @@ function print_rewrite($wp_rewrite) {
 	$r_link = '';
 	$rewrite_rules2 = $wp_rewrite->generate_rewrite_rule($wp_rewrite->permalink_structure.'print');
 	array_splice($rewrite_rules2, 1);
-	$r_rule = array_shift(array_keys($rewrite_rules2));
+	$r_rule = array_keys($rewrite_rules2);
+	$r_rule = array_shift($r_rule);
 	$r_rule = str_replace('/trackback', '',$r_rule);
-	$r_link = array_shift(array_values($rewrite_rules2));
-	$r_link = str_replace('tb=1', 'print=1', $r_link);
+	$r_link = array_values($rewrite_rules2);
+	$r_link = array_shift($r_link);
+	$r_link = str_replace('tb=1', 'print=1', $r_link); 
     $print_rules = array($r_rule => $r_link, '(.+)/printpage/?$' => 'index.php?pagename='.$wp_rewrite->preg_index(1).'&print=1');
     $wp_rewrite->rules = $print_rules + $wp_rewrite->rules;
 }
