@@ -69,12 +69,12 @@ function print_link($text_post = 'Print This Post', $text_page = 'Print This Pag
 	$permalink = get_permalink();
 	if(!empty($using_permalink)) {
 		if(is_page()) {
-			echo '<a href="'.$permalink.'printpage/" title="'.$text_page.'">'.$text_page.'</a>';
+			echo '<a href="'.$permalink.'printpage/" title="'.$text_page.'" rel="nofollow">'.$text_page.'</a>';
 		} else {
-			echo '<a href="'.$permalink.'print/" title="'.$text_post.'">'.$text_post.'</a>';
+			echo '<a href="'.$permalink.'print/" title="'.$text_post.'" rel="nofollow">'.$text_post.'</a>';
 		}
 	} else {
-		echo '<a href="'.$permalink.'&amp;print=1" title="'.$text_post.'">'.$text_post.'</a>';
+		echo '<a href="'.$permalink.'&amp;print=1" title="'.$text_post.'" rel="nofollow">'.$text_post.'</a>';
 	}
 }
 
@@ -91,12 +91,12 @@ function print_link_image() {
 	}
 	if(!empty($using_permalink)) {
 		if(is_page()) {
-			echo '<a href="'.$permalink.'printpage/" title="Print This Page">'.$print_image.'</a>';
+			echo '<a href="'.$permalink.'printpage/" title="Print This Page" rel="nofollow">'.$print_image.'</a>';
 		} else {
-			echo '<a href="'.$permalink.'print/" title="Print This Post">'.$print_image.'</a>';
+			echo '<a href="'.$permalink.'print/" title="Print This Post" rel="nofollow">'.$print_image.'</a>';
 		}
 	} else {
-		echo '<a href="'.$permalink.'&amp;print=1" title="Print This Post/Page">'.$print_image.'</a>';
+		echo '<a href="'.$permalink.'&amp;print=1" title="Print This Post/Page" rel="nofollow">'.$print_image.'</a>';
 	}
 }
 
