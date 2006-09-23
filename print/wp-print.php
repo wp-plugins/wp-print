@@ -32,6 +32,7 @@ add_filter('comments_template', 'print_template_comments');
 <head>
 <title><?php bloginfo('name'); ?> <?php wp_title(); ?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="Robots" content="noindex" />
 <style type="text/css" media="screen, print">
 Body {
 	font-family: Verdana, Arial, Tahoma;
@@ -85,7 +86,7 @@ HR.Divider {
 		<?php if (have_posts()): ?>
 			<?php while (have_posts()): the_post(); ?>
 					<p id="BlogTitle"><?php the_title(); ?></p>
-					<p id="BlogDate">Posted By <u><?php the_author(); ?></u> On <?php the_time('jS F Y @ H:i'); ?> In <?php print_categories('<u>', '</u>'); ?> | <u><?php print_comments_number(); ?></u></p>
+					<p id="BlogDate">Posted By <u><?php the_author(); ?></u> On <?php the_time(get_settings("date_format").' @ '.get_settings("time_format")); ?> In <?php print_categories('<u>', '</u>'); ?> | <u><?php print_comments_number(); ?></u></p>
 					<div id="BlogContent"><?php print_content(); ?></div>
 			<?php endwhile; ?>
 			<hr class="Divider" align="center" />
