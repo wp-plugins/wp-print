@@ -121,15 +121,17 @@ function print_content($display = true) {
 			$content = remove_image($content);
 		}
 		if(print_can('links')) {
-			preg_match_all('/<a%20(.+?)href=\"(.+?)\"(.*?)>(.+?)<\/a>/', $content, $matches);
+			preg_match_all('/<a(.+\s?)href=\"(.+?)\"(.*?)>(.+?)<\/a>/', $content, $matches);
 			for ($i=0; $i < count($matches[0]); $i++) {
 				$link_match = $matches[0][$i];
 				$link_number++;
 				$link_url = $matches[2][$i];
 				$link_url = (strtolower(substr($link_url,0,7)) != 'http://') ? get_settings('home') . $link_url : $link_url;
-				$link_text = $matches[4][$i];
-				$content = str_replace($link_match, '['.$link_number."] <a href=\"$link_url\" target=\"_blank\">".$link_text.'</a>', $content);
-				$link_url = chunk_split($link_url, 100, "<br />\n");
+				$link_text = $matches[4][$i];				
+				$content = str_replace_one($link_match, '['.$link_number."] <a href=\"$link_url\" rel=\"external\">".$link_text.'</a>', $content);
+				if(strlen($link_url) > 100) {
+					$link_url = chunk_split($link_url, 100, "<br />\n");
+				}
 				if(preg_match('/<img(.+?)src=\"(.+?)\"(.*?)>/',$link_text)) {
 					$links_text .= '<br />['.$link_number.'] '.__('Image').': <b>'.$link_url.'</b>';
 				} else {
@@ -164,15 +166,17 @@ function print_comments_content($display = true) {
 		$content = remove_image($content);
 	}
 	if(print_can('links')) {
-		preg_match_all('/<a%20(.+?)href=\"(.+?)\"(.*?)>(.+?)<\/a>/', $content, $matches);
+		preg_match_all('/<a(.+\s?)href=\"(.+?)\"(.*?)>(.+?)<\/a>/', $content, $matches);
 		for ($i=0; $i < count($matches[0]); $i++) {
 			$link_match = $matches[0][$i];
 			$link_number++;
 			$link_url = $matches[2][$i];
 			$link_url = (strtolower(substr($link_url,0,7)) != 'http://') ? get_settings('home') . $link_url : $link_url;
 			$link_text = $matches[4][$i];
-			$content = str_replace($link_match, '['.$link_number."] <a href=\"$link_url\" target=\"_blank\">".$link_text.'</a>', $content);
-			$link_url = chunk_split($link_url, 100, "<br />\n");
+			$content = str_replace_one($link_match, '['.$link_number."] <a href=\"$link_url\" rel=\"external\">".$link_text.'</a>', $content);
+			if(strlen($link_url) > 100) {
+				$link_url = chunk_split($link_url, 100, "<br />\n");
+			}
 			if(preg_match('/<img(.+?)src=\"(.+?)\"(.*?)>/',$link_text)) {
 				$links_text .= '<br />['.$link_number.'] '.__('Image').': <b>'.$link_url.'</b>';
 			} else {
@@ -256,6 +260,16 @@ function print_can($type) {
 function remove_image($content) {
 	$content= preg_replace('/<img(.+?)src=\"(.+?)\"(.*?)>/', '',$content);
 	return $content;
+}
+
+
+### Function: Replace One Time Only
+function str_replace_one($search, $replace, $content){
+	if ($pos = strpos($content, $search)) {
+		return substr($content, 0, $pos).$replace.substr($content, $pos+strlen($search));
+	} else {
+		return $content;
+	}
 }
 
 
