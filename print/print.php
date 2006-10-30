@@ -3,7 +3,7 @@
 Plugin Name: WP-Print
 Plugin URI: http://www.lesterchan.net/portfolio/programming.php
 Description: Displays A Printable Version Of Your WordPress Weblog Post.
-Version: 2.05
+Version: 2.06
 Author: GaMerZ
 Author URI: http://www.lesterchan.net
 */
@@ -121,7 +121,7 @@ function print_content($display = true) {
 			$content = remove_image($content);
 		}
 		if(print_can('links')) {
-			preg_match_all('/<a(.+\s?)href=\"(.+?)\"(.*?)>(.+?)<\/a>/', $content, $matches);
+			preg_match_all('/<a(.+?)href=\"(.+?)\"(.*?)>(.+?)<\/a>/', $content, $matches);
 			for ($i=0; $i < count($matches[0]); $i++) {
 				$link_match = $matches[0][$i];
 				$link_number++;
@@ -166,7 +166,7 @@ function print_comments_content($display = true) {
 		$content = remove_image($content);
 	}
 	if(print_can('links')) {
-		preg_match_all('/<a(.+\s?)href=\"(.+?)\"(.*?)>(.+?)<\/a>/', $content, $matches);
+		preg_match_all('/<a(.+?)href=\"(.+?)\"(.*?)>(.+?)<\/a>/', $content, $matches);
 		for ($i=0; $i < count($matches[0]); $i++) {
 			$link_match = $matches[0][$i];
 			$link_number++;
