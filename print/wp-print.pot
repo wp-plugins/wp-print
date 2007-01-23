@@ -1,0 +1,213 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP-Print 2.10\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2007-01-23 23:19+0800\n"
+"Last-Translator: Lester 'GaMerZ' Chan <gamerz84@hotmail.com>\n"
+"Language-Team: Lester Chan <gamerz84@hotmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-Country: SINGAPORE\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: print-options.php:39
+#: print-options.php:81
+#: print-options.php:148
+msgid "Print Options"
+msgstr ""
+
+#: print-options.php:44
+msgid "Updated"
+msgstr ""
+
+#: print-options.php:49
+msgid "No Print Option Updated"
+msgstr ""
+
+#: print-options.php:84
+msgid "Print Styles"
+msgstr ""
+
+#: print-options.php:87
+msgid "Print Text Link For Post"
+msgstr ""
+
+#: print-options.php:93
+msgid "Print Text Link For Page"
+msgstr ""
+
+#: print-options.php:99
+msgid "Print Icon"
+msgstr ""
+
+#: print-options.php:127
+msgid "Print Text Link Style"
+msgstr ""
+
+#: print-options.php:130
+msgid "Print Icon With Text Link"
+msgstr ""
+
+#: print-options.php:131
+msgid "Print Icon Only"
+msgstr ""
+
+#: print-options.php:132
+msgid "Print Text Link Only"
+msgstr ""
+
+#: print-options.php:133
+msgid "Custom"
+msgstr ""
+
+#: print-options.php:137
+msgid "HTML is allowed."
+msgstr ""
+
+#: print-options.php:138
+msgid "URL to the printable post/page."
+msgstr ""
+
+#: print-options.php:139
+msgid "Print text link of the post/page that you have typed in above."
+msgstr ""
+
+#: print-options.php:140
+msgid "URL to the print icon you have chosen above."
+msgstr ""
+
+#: print-options.php:141
+msgid "Restore Default Template"
+msgstr ""
+
+#: print-options.php:151
+msgid "Print Comments?"
+msgstr ""
+
+#: print-options.php:154
+#: print-options.php:163
+#: print-options.php:172
+msgid "Yes"
+msgstr ""
+
+#: print-options.php:155
+#: print-options.php:164
+#: print-options.php:173
+msgid "No"
+msgstr ""
+
+#: print-options.php:160
+msgid "Print Links?"
+msgstr ""
+
+#: print-options.php:169
+msgid "Print Images?"
+msgstr ""
+
+#: print-options.php:180
+msgid "Update Options"
+msgstr ""
+
+#: print-options.php:180
+msgid "Cancel"
+msgstr ""
+
+#: print.php:39
+msgid "Print"
+msgstr ""
+
+#: print.php:163
+#: print.php:216
+msgid "Image"
+msgstr ""
+
+#: print.php:238
+msgid "No Comments"
+msgstr ""
+
+#: print.php:240
+msgid "1 Comment"
+msgstr ""
+
+#: print.php:242
+#, php-format
+msgid "%s Comments"
+msgstr ""
+
+#: print.php:245
+msgid "Comments Disabled"
+msgstr ""
+
+#: print.php:248
+msgid "Comments Hidden"
+msgstr ""
+
+#: print.php:259
+msgid "URLs in this post:"
+msgstr ""
+
+#: print.php:321
+msgid "Print This Post"
+msgstr ""
+
+#: print.php:322
+msgid "Print This Page"
+msgstr ""
+
+#: wp-print-comments.php:21
+msgid "To"
+msgstr ""
+
+#: wp-print-comments.php:24
+msgid "By"
+msgstr ""
+
+#: wp-print-comments.php:24
+#: wp-print.php:89
+msgid "On"
+msgstr ""
+
+#: wp-print-comments.php:27
+msgid "Your comment is awaiting moderation."
+msgstr ""
+
+#: wp-print.php:89
+msgid "Posted By"
+msgstr ""
+
+#: wp-print.php:89
+msgid "In"
+msgstr ""
+
+#: wp-print.php:96
+msgid "Article printed from"
+msgstr ""
+
+#: wp-print.php:97
+msgid "URL to article"
+msgstr ""
+
+#: wp-print.php:101
+msgid "Click"
+msgstr ""
+
+#: wp-print.php:101
+msgid "Click here to print."
+msgstr ""
+
+#: wp-print.php:101
+msgid "here"
+msgstr ""
+
+#: wp-print.php:101
+msgid "to print."
+msgstr ""
+
+#: wp-print.php:103
+msgid "No posts matched your criteria."
+msgstr ""
+

@@ -3,13 +3,14 @@
 Plugin Name: WP-Print
 Plugin URI: http://www.lesterchan.net/portfolio/programming.php
 Description: Displays A Printable Version Of Your WordPress Weblog Post.
-Version: 2.06
+Version: 2.10
 Author: GaMerZ
 Author URI: http://www.lesterchan.net
 */
 
 
-/*  Copyright 2006  Lester Chan  (email : gamerz84@hotmail.com)
+/*  
+	Copyright 2007  Lester Chan  (email : gamerz84@hotmail.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,11 +28,15 @@ Author URI: http://www.lesterchan.net
 */
 
 
+### Create Text Domain For Translations
+load_plugin_textdomain('wp-print', 'wp-content/plugins/print');
+
+
 ### Function: Print Option Menu
 add_action('admin_menu', 'print_menu');
 function print_menu() {
 	if (function_exists('add_options_page')) {
-		add_options_page(__('Print'), __('Print'), 'manage_options', 'print/print-options.php') ;
+		add_options_page(__('Print', 'wp-print'), __('Print', 'wp-print'), 'manage_options', 'print/print-options.php') ;
 	}
 }
 
@@ -63,41 +68,55 @@ function print_variables($public_query_vars) {
 
 
 ### Function: Display Print Link
-function print_link($text_post = 'Print This Post', $text_page = 'Print This Page') {
+function print_link($deprecated = '', $deprecated2 ='') {
 	global $id;
 	$using_permalink = get_settings('permalink_structure');
-	$permalink = get_permalink();
+	$print_options = get_settings('print_options');
+	$print_style = intval($print_options['print_style']);
+	$print_text = stripslashes($print_options['post_text']);
+	$print_icon = get_settings('siteurl').'/wp-content/plugins/print/images/'.$print_options['print_icon'];
+	$print_link = get_permalink();
+	$print_html = stripslashes($print_options['print_html']);
 	if(!empty($using_permalink)) {
 		if(is_page()) {
-			echo '<a href="'.$permalink.'printpage/" title="'.$text_page.'" rel="nofollow">'.$text_page.'</a>';
+			$print_text = stripslashes($print_options['page_text']);
+			$print_link = $print_link.'printpage/';
 		} else {
-			echo '<a href="'.$permalink.'print/" title="'.$text_post.'" rel="nofollow">'.$text_post.'</a>';
+			$print_link = $print_link.'print/';
 		}
 	} else {
-		echo '<a href="'.$permalink.'&amp;print=1" title="'.$text_post.'" rel="nofollow">'.$text_post.'</a>';
+		if(is_page()) {
+			$print_text = stripslashes($print_options['page_text']);
+		}
+		$print_link = $print_link.'&amp;print=1';
+	}
+	unset($print_options);
+	switch($print_style) {
+		// Icon + Text Link
+		case 1:
+			echo '<img src="'.$print_icon.'" alt="'.$print_text.'" title="'.$print_text.'" border="0" />&nbsp;<a href="'.$print_link.'" title="'.$print_text.'" rel="nofollow">'.$print_text.'</a>'."\n";
+			break;
+		// Icon Only
+		case 2:
+			echo '<a href="'.$print_link.'" title="'.$print_text.'" rel="nofollow"><img src="'.$print_icon.'" alt="'.$print_text.'" title="'.$print_text.'" border="0" /></a>'."\n";
+			break;
+		// Text Link Only
+		case 3:
+			echo '<a href="'.$print_link.'" title="'.$print_text.'" rel="nofollow">'.$print_text.'</a>'."\n";
+			break;
+		case 4:
+			$print_html = str_replace("%PRINT_URL%", $print_link, $print_html);
+			$print_html = str_replace("%PRINT_TEXT%", $print_text, $print_html);
+			$print_html = str_replace("%PRINT_ICON_URL%", $print_icon, $print_html);
+			echo $print_html;
+			break;
 	}
 }
 
 
-### Function: Display Print Image Link
+### Function: Display Print Image Link (Deprecated)
 function print_link_image() {
-	global $id;
-	$using_permalink = get_settings('permalink_structure');
-	$permalink = get_permalink();
-	if(file_exists(ABSPATH.'/wp-content/plugins/print/images/print.gif')) {
-		$print_image = '<img src="'.get_settings('siteurl').'/wp-content/plugins/print/images/print.gif" alt="Print This Post/Page" />';
-	} else {
-		$print_image = 'Print';
-	}
-	if(!empty($using_permalink)) {
-		if(is_page()) {
-			echo '<a href="'.$permalink.'printpage/" title="Print This Page" rel="nofollow">'.$print_image.'</a>';
-		} else {
-			echo '<a href="'.$permalink.'print/" title="Print This Post" rel="nofollow">'.$print_image.'</a>';
-		}
-	} else {
-		echo '<a href="'.$permalink.'&amp;print=1" title="Print This Post/Page" rel="nofollow">'.$print_image.'</a>';
-	}
+	print_link();
 }
 
 
@@ -126,14 +145,22 @@ function print_content($display = true) {
 				$link_match = $matches[0][$i];
 				$link_number++;
 				$link_url = $matches[2][$i];
-				$link_url = (strtolower(substr($link_url,0,7)) != 'http://') ? get_settings('home') . $link_url : $link_url;
+				if(stristr($link_url, 'https://')) {
+					 $link_url =(strtolower(substr($link_url,0,8)) != 'https://') ?get_settings('home') . $link_url : $link_url;
+				} else if( stristr($link_url, 'mailto:')) {
+					$link_url =(strtolower(substr($link_url,0,7)) != 'mailto:') ?get_settings('home') . $link_url : $link_url;
+				} else if( $link_url[0] == '#' ) {
+					$link_url = $link_url; 
+				} else {
+					$link_url =(strtolower(substr($link_url,0,7)) != 'http://') ?get_settings('home') . $link_url : $link_url;
+				}
 				$link_text = $matches[4][$i];				
 				$content = str_replace_one($link_match, '['.$link_number."] <a href=\"$link_url\" rel=\"external\">".$link_text.'</a>', $content);
 				if(strlen($link_url) > 100) {
 					$link_url = chunk_split($link_url, 100, "<br />\n");
 				}
 				if(preg_match('/<img(.+?)src=\"(.+?)\"(.*?)>/',$link_text)) {
-					$links_text .= '<br />['.$link_number.'] '.__('Image').': <b>'.$link_url.'</b>';
+					$links_text .= '<br />['.$link_number.'] '.__('Image', 'wp-print').': <b>'.$link_url.'</b>';
 				} else {
 					$links_text .= '<br />['.$link_number.'] '.$link_text.': <b>'.$link_url.'</b>';
 				}
@@ -171,14 +198,22 @@ function print_comments_content($display = true) {
 			$link_match = $matches[0][$i];
 			$link_number++;
 			$link_url = $matches[2][$i];
-			$link_url = (strtolower(substr($link_url,0,7)) != 'http://') ? get_settings('home') . $link_url : $link_url;
+			if(stristr($link_url, 'https://')) {
+				 $link_url =(strtolower(substr($link_url,0,8)) != 'https://') ?get_settings('home') . $link_url : $link_url;
+			} else if(stristr($link_url, 'mailto:')) {
+				$link_url =(strtolower(substr($link_url,0,7)) != 'mailto:') ?get_settings('home') . $link_url : $link_url;
+			} else if($link_url[0] == '#') {
+				$link_url = $link_url; 
+			} else {
+				$link_url =(strtolower(substr($link_url,0,7)) != 'http://') ?get_settings('home') . $link_url : $link_url;
+			}
 			$link_text = $matches[4][$i];
 			$content = str_replace_one($link_match, '['.$link_number."] <a href=\"$link_url\" rel=\"external\">".$link_text.'</a>', $content);
 			if(strlen($link_url) > 100) {
 				$link_url = chunk_split($link_url, 100, "<br />\n");
 			}
 			if(preg_match('/<img(.+?)src=\"(.+?)\"(.*?)>/',$link_text)) {
-				$links_text .= '<br />['.$link_number.'] '.__('Image').': <b>'.$link_url.'</b>';
+				$links_text .= '<br />['.$link_number.'] '.__('Image', 'wp-print').': <b>'.$link_url.'</b>';
 			} else {
 				$links_text .= '<br />['.$link_number.'] '.$link_text.': <b>'.$link_url.'</b>';
 			}
@@ -200,17 +235,17 @@ function print_comments_number() {
 	if($comment_status == 'open') {
 		$num_comments = get_comments_number();
 		if($num_comments == 0) {
-			$comment_text = __('No Comments');
+			$comment_text = __('No Comments', 'wp-print');
 		} elseif($num_comments == 1) {
-			$comment_text = __('1 Comment');
+			$comment_text = __('1 Comment', 'wp-print');
 		} else {
-			$comment_text = __($num_comments.' Comments');
+			$comment_text = sprintf(__('%s Comments', 'wp-print'), $num_comments);
 		}
 	} else {
-		$comment_text = __('Comments Disabled');
+		$comment_text = __('Comments Disabled', 'wp-print');
 	}
 	if(!empty($post->post_password) && stripslashes($_COOKIE['wp-postpass_'.COOKIEHASH]) != $post->post_password) {
-		_e('Comments Hidden');
+		_e('Comments Hidden', 'wp-print');
 	} else {
 		echo $comment_text;
 	}
@@ -218,8 +253,11 @@ function print_comments_number() {
 
 
 ### Function: Print Links
-function print_links($text_links = 'URLs in this post:') {
+function print_links($text_links = '') {
 	global $links_text;
+	if(empty($text_links)) {
+		$text_links = __('URLs in this post:', 'wp-print');
+	}
 	if(!empty($links_text)) { 
 		echo $text_links.$links_text; 
 	}
@@ -276,8 +314,15 @@ function str_replace_one($search, $replace, $content){
 ### Function: Print Options
 add_action('activate_print/print.php', 'print_init');
 function print_init() {
+	// Delete Options First
+	delete_option('print_options');
 	// Add Options
 	$print_options = array();
+	$print_options['post_text'] = __('Print This Post', 'wp-print');
+	$print_options['page_text'] = __('Print This Page', 'wp-print');
+	$print_options['print_icon'] = 'print.gif';
+	$print_options['print_style'] = 1;
+	$print_options['print_html'] = '<a href="%PRINT_URL%" rel="nofollow" title="%PRINT_TEXT%">%PRINT_TEXT%</a>';
 	$print_options['comments'] = 0;
 	$print_options['links'] = 1;
 	$print_options['images'] = 1;

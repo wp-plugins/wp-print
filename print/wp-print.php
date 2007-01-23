@@ -2,8 +2,8 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.0 Plugin: WP-Print 2.06										|
-|	Copyright (c) 2005 Lester "GaMerZ" Chan									|
+|	WordPress 2.1 Plugin: WP-Print 2.10										|
+|	Copyright (c) 2007 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
 |	- Lester "GaMerZ" Chan															|
@@ -32,7 +32,7 @@ add_filter('comments_template', 'print_template_comments');
 <head>
 <title><?php bloginfo('name'); ?> <?php wp_title(); ?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="Robots" content="noindex" />
+<meta name="Robots" content="noindex, nofollow" />
 <style type="text/css" media="screen, print">
 Body {
 	font-family: Verdana, Arial, Tahoma;
@@ -80,27 +80,27 @@ HR.Divider {
 </style>
 </head>
 <body>
-<p align="center"><b>- <?php bloginfo('name'); ?> - <?php bloginfo('url')?> -</b></p>
+<p align="center"><strong>- <?php bloginfo('name'); ?> - <?php bloginfo('url')?> -</strong></p>
 <center>
 	<div id="Outline">
 		<?php if (have_posts()): ?>
 			<?php while (have_posts()): the_post(); ?>
 					<p id="BlogTitle"><?php the_title(); ?></p>
-					<p id="BlogDate">Posted By <u><?php the_author(); ?></u> On <?php the_time(get_settings("date_format").' @ '.get_settings("time_format")); ?> In <?php print_categories('<u>', '</u>'); ?> | <u><?php print_comments_number(); ?></u></p>
+					<p id="BlogDate"><?php _e('Posted By', 'wp-print'); ?> <u><?php the_author(); ?></u> <?php _e('On', 'wp-print'); ?> <?php the_time(get_settings("date_format").' @ '.get_settings("time_format")); ?> <?php _e('In', 'wp-print'); ?> <?php print_categories('<u>', '</u>'); ?> | <u><?php print_comments_number(); ?></u></p>
 					<div id="BlogContent"><?php print_content(); ?></div>
 			<?php endwhile; ?>
 			<hr class="Divider" align="center" />
 			<?php if(print_can('comments')): ?>
 				<?php comments_template(); ?>
 			<?php endif; ?>
-			<p align="left">Article printed from <?php bloginfo('name'); ?>: <b><?php bloginfo('url'); ?></b></p>
-			<p align="left">URL to article: <b><?php the_permalink(); ?></b></p>
+			<p align="left"><?php _e('Article printed from', 'wp-print'); ?> <?php bloginfo('name'); ?>: <strong><?php bloginfo('url'); ?></strong></p>
+			<p align="left"><?php _e('URL to article', 'wp-print'); ?>: <strong><?php the_permalink(); ?></strong></p>
 			<?php if(print_can('links')): ?>
 				<p align="left"><?php print_links(); ?></p>
 			<?php endif; ?>
-			<p align="right">Click <a href="#Print" onclick="window.print(); return false;" title="Click here to print.">here</a> to print.</p>
+			<p align="right"><?php _e('Click', 'wp-print'); ?> <a href="#Print" onclick="window.print(); return false;" title="<?php _e('Click here to print.', 'wp-print'); ?>"><?php _e('here', 'wp-print'); ?></a> <?php _e('to print.', 'wp-print'); ?></p>
 		<?php else: ?>
-				<p align="center">No posts matched your criteria.</p>
+				<p align="center"><?php _e('No posts matched your criteria.', 'wp-print'); ?></p>
 		<?php endif; ?>
 	</div>
 </center>

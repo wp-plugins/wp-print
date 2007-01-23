@@ -2,7 +2,7 @@
 <html>
 <head>	
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<title>WP-Print 2.06 Readme</title>
+	<title>WP-Print 2.10 Readme</title>
 	<style type="text/css" media="screen">
 		/* Default Style */
 		BODY {
@@ -203,7 +203,7 @@
 <body>
 <div id="Container">
 	<!-- Title -->
-	<div id="Title">WP-Print 2.06&nbsp;&nbsp;&nbsp;<span style="color: #aaaaaa;">Readme</span></div>
+	<div id="Title">WP-Print 2.10&nbsp;&nbsp;&nbsp;<span style="color: #aaaaaa;">Readme</span></div>
 
 	<!-- Tabs -->
 	<ul id="Tabs">
@@ -229,7 +229,7 @@
 				<b>&raquo;</b>
 				<script type="text/javascript">
 					/* <![CDATA[*/
-					document.write(' <a href="mailto:gamerz84@hotmail.com?Subject=WP-Print%202.06%20Support" title="EMail To gamerz84@hotmail.com">gamerz84@hotmail.com</a>');
+					document.write(' <a href="mailto:gamerz84@hotmail.com?Subject=WP-Print%202.10%20Support" title="EMail To gamerz84@hotmail.com">gamerz84@hotmail.com</a>');
 					/* ]]> */
 				</script>
 			</p>
@@ -243,7 +243,7 @@
 			</p>
 			<p>
 				<b>Download:</b><br />
-				<b>&raquo;</b> <a href="http://www.lesterchan.net/others/downloads.php?id=12" title="http://www.lesterchan.net/others/downloads.php?id=12">WP-Print 2.06 For WordPress 2.1.x</a><br />
+				<b>&raquo;</b> <a href="http://www.lesterchan.net/others/downloads.php?id=12" title="http://www.lesterchan.net/others/downloads.php?id=12">WP-Print 2.10 For WordPress 2.1.x</a><br />
 				<b>&raquo;</b> <a href="http://www.lesterchan.net/others/downloads/wp-print206.zip" title="http://www.lesterchan.net/others/downloads/wp-print206.zip">WP-Print 2.06 For WordPress 2.0.x</a><br />
 				<b>&raquo;</b> <a href="http://www.lesterchan.net/others/downloads/wp-print200a.zip" title="http://www.lesterchan.net/others/downloads/wp-print200a.zip">WP-Print 2.00a For WordPress 1.5.2</a>
 			</p>
@@ -265,11 +265,12 @@
 			</p>
 			<p>
 				<b>Updated:</b><br />
-				<b>&raquo;</b> 1st October 2006
+				<b>&raquo;</b> 1st February 2007
 			</p>
 			<p>
 				<b>Note:</b><br />
-				<b>&raquo;</b> The <b>Changelog</b>, <b>Installation</b>, <b>Upgrade</b>, <b>Usage</b> Tab at the top of the page.
+				<b>&raquo;</b> The <b>Changelog</b>, <b>Installation</b>, <b>Upgrade</b>, <b>Usage</b> Tab at the top of the page.<br />
+				<b>&raquo;</b> Please go to 'WP-Admin -> Options -> Print' to configure the print text link style.
 			</p>
 			<p>
 				<b>Donations:</b><br />
@@ -286,6 +287,16 @@
 		<div id="Changelog" style="display: none;">
 			<div class="SubTitle">&raquo; Changelog</div>
 			<ul>
+				<li>
+					<b>Version 2.10 (01-02-2007)</b>
+					<ul>
+						<li>NEW: Works For WordPress 2.1 Only</li>
+						<li>NEW: Localize WP-Print</li>
+						<li>NEW: Ability To Configure The Text For Print Links Via 'WP-Admin -> Options -> Print'</li>
+						<li>NEW: The Text For Print Links Can No Longer Be Pass To The Function print_link() or print_link_image()</li>
+						<li>FIXED: MUltiple URL Type Fixed By (Virgil - <a href="http://virgil.gr">http://virgil.gr</a>)</li>
+					</ul>
+				</li>
 				<li>
 					<b>Version 2.06 (01-10-2006)</b>
 					<ul>
@@ -368,7 +379,7 @@
 					<b>Activate</b> WP-Print Plugin
 				</li>
 				<li>
-					You Need To Re-Generate The Permalink (<b>Options -> Permalinks Options -> Update Permalink Structure</b>)
+					You Need To Re-Generate The Permalink (<b>WP-Admin -> Options -> Permalinks Options -> Update Permalink Structure</b>)
 				</li>
 				<li>
 					Refer To <b>Usage</b> For Further Instructions
@@ -379,7 +390,7 @@
 		<!-- Upgrade Instructions -->	
 		<div id="Upgrade" style="display: none;">
 			<div class="SubTitle">&raquo; Upgrade Instructions</div>
-			<div class="SubSubTitle">From v1.0x To v2.06</div>
+			<div class="SubSubTitle">From v1.0x To v2.10</div>
 			<ol>
 				<li>
 					<b>Deactivate</b> WP-Print Plugin
@@ -402,7 +413,7 @@
 					<b>Activate</b> WP-Print Plugin
 				</li>
 				<li>
-					You Need To Re-Generate The Permalink (<b>Options -> Permalinks Options -> Update Permalink Structure</b>)
+					You Need To Re-Generate The Permalink (<b>WP-Admin -> Options -> Permalinks Options -> Update Permalink Structure</b>)
 				</li>
 				<li>
 					Refer To <b>Usage</b> For Further Instructions
@@ -417,7 +428,7 @@
 			<ol>
 				<li>
 					Open <b>wp-content/themes/&lt;YOUR THEME NAME&gt;/index.php</b>
-					<p>You may place it in <b>single.php</b>, <b>post.php</b> or <b>page.php</b> also.</p>
+					<p>You may place it in <b>single.php</b>, <b>post.php</b>, <b>page.php</b> or <b>theloop.php</b> also.</p>
 				</li>
 				<li>
 					Find:
@@ -430,14 +441,14 @@
 					<blockquote>
 						&lt;?php if(function_exists('wp_print')) { print_link(); } ?&gt;
 					</blockquote>
-					<p>The <b>first value</b> you pass in is the text for printing post. The <b>second value</b> is the text for printing page.</p>
-					<p>Default: print_link('Print This Post', 'Print This Page')</p>
-					<p>If you want to use an image/icon instead, replace print_link(); with <b>print_link_image();</b></p>
+				</li>
+				<li>
+					Go to <b>'WP-Admin -> Options -> Print'</b> to configure the style of the print text link.
 				</li>
 			</ol>
 		</div>
 	</div>
 </div>
-<p id="Copyright">WP-Print 2.06<br />Copyright &copy; 2007 Lester 'GaMerZ' Chan. All Rights Reserved.</p>
+<p id="Copyright">WP-Print 2.10<br />Copyright &copy; 2007 Lester 'GaMerZ' Chan. All Rights Reserved.</p>
 </body>
 </html>
