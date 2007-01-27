@@ -51,7 +51,7 @@ if($_POST['Submit']) {
 }
 
 ### Get Print Options
-$print_options = get_settings('print_options');
+$print_options = get_option('print_options');
 ?>
 <script type="text/javascript">
 	/* <![CDATA[*/
@@ -100,7 +100,7 @@ $print_options = get_settings('print_options');
 					<td align="left">
 						<?php
 							$print_icon = $print_options['print_icon'];
-							$print_icon_url = get_settings('siteurl').'/wp-content/plugins/print/images';
+							$print_icon_url = get_option('siteurl').'/wp-content/plugins/print/images';
 							$print_icon_path = ABSPATH.'/wp-content/plugins/print/images';
 							if($handle = @opendir($print_icon_path)) {     
 								while (false !== ($filename = readdir($handle))) {  

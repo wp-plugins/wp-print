@@ -70,11 +70,11 @@ function print_variables($public_query_vars) {
 ### Function: Display Print Link
 function print_link($deprecated = '', $deprecated2 ='') {
 	global $id;
-	$using_permalink = get_settings('permalink_structure');
-	$print_options = get_settings('print_options');
+	$using_permalink = get_option('permalink_structure');
+	$print_options = get_option('print_options');
 	$print_style = intval($print_options['print_style']);
 	$print_text = stripslashes($print_options['post_text']);
-	$print_icon = get_settings('siteurl').'/wp-content/plugins/print/images/'.$print_options['print_icon'];
+	$print_icon = get_option('siteurl').'/wp-content/plugins/print/images/'.$print_options['print_icon'];
 	$print_link = get_permalink();
 	$print_html = stripslashes($print_options['print_html']);
 	if(!empty($using_permalink)) {
@@ -146,13 +146,13 @@ function print_content($display = true) {
 				$link_number++;
 				$link_url = $matches[2][$i];
 				if(stristr($link_url, 'https://')) {
-					 $link_url =(strtolower(substr($link_url,0,8)) != 'https://') ?get_settings('home') . $link_url : $link_url;
+					 $link_url =(strtolower(substr($link_url,0,8)) != 'https://') ?get_option('home') . $link_url : $link_url;
 				} else if( stristr($link_url, 'mailto:')) {
-					$link_url =(strtolower(substr($link_url,0,7)) != 'mailto:') ?get_settings('home') . $link_url : $link_url;
+					$link_url =(strtolower(substr($link_url,0,7)) != 'mailto:') ?get_option('home') . $link_url : $link_url;
 				} else if( $link_url[0] == '#' ) {
 					$link_url = $link_url; 
 				} else {
-					$link_url =(strtolower(substr($link_url,0,7)) != 'http://') ?get_settings('home') . $link_url : $link_url;
+					$link_url =(strtolower(substr($link_url,0,7)) != 'http://') ?get_option('home') . $link_url : $link_url;
 				}
 				$link_text = $matches[4][$i];				
 				$content = str_replace_one($link_match, '['.$link_number."] <a href=\"$link_url\" rel=\"external\">".$link_text.'</a>', $content);
@@ -199,13 +199,13 @@ function print_comments_content($display = true) {
 			$link_number++;
 			$link_url = $matches[2][$i];
 			if(stristr($link_url, 'https://')) {
-				 $link_url =(strtolower(substr($link_url,0,8)) != 'https://') ?get_settings('home') . $link_url : $link_url;
+				 $link_url =(strtolower(substr($link_url,0,8)) != 'https://') ?get_option('home') . $link_url : $link_url;
 			} else if(stristr($link_url, 'mailto:')) {
-				$link_url =(strtolower(substr($link_url,0,7)) != 'mailto:') ?get_settings('home') . $link_url : $link_url;
+				$link_url =(strtolower(substr($link_url,0,7)) != 'mailto:') ?get_option('home') . $link_url : $link_url;
 			} else if($link_url[0] == '#') {
 				$link_url = $link_url; 
 			} else {
-				$link_url =(strtolower(substr($link_url,0,7)) != 'http://') ?get_settings('home') . $link_url : $link_url;
+				$link_url =(strtolower(substr($link_url,0,7)) != 'http://') ?get_option('home') . $link_url : $link_url;
 			}
 			$link_text = $matches[4][$i];
 			$content = str_replace_one($link_match, '['.$link_number."] <a href=\"$link_url\" rel=\"external\">".$link_text.'</a>', $content);
@@ -289,7 +289,7 @@ function print_pagetitle($print_pagetitle) {
 
 ### Function: Can Print?
 function print_can($type) {
-	$print_options = get_settings('print_options');
+	$print_options = get_option('print_options');
 	return intval($print_options[$type]);
 }
 

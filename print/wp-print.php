@@ -86,7 +86,7 @@ HR.Divider {
 		<?php if (have_posts()): ?>
 			<?php while (have_posts()): the_post(); ?>
 					<p id="BlogTitle"><?php the_title(); ?></p>
-					<p id="BlogDate"><?php _e('Posted By', 'wp-print'); ?> <u><?php the_author(); ?></u> <?php _e('On', 'wp-print'); ?> <?php the_time(get_settings("date_format").' @ '.get_settings("time_format")); ?> <?php _e('In', 'wp-print'); ?> <?php print_categories('<u>', '</u>'); ?> | <u><?php print_comments_number(); ?></u></p>
+					<p id="BlogDate"><?php _e('Posted By', 'wp-print'); ?> <u><?php the_author(); ?></u> <?php _e('On', 'wp-print'); ?> <?php the_time(get_option("date_format").' @ '.get_option("time_format")); ?> <?php _e('In', 'wp-print'); ?> <?php print_categories('<u>', '</u>'); ?> | <u><?php print_comments_number(); ?></u></p>
 					<div id="BlogContent"><?php print_content(); ?></div>
 			<?php endwhile; ?>
 			<hr class="Divider" align="center" />
