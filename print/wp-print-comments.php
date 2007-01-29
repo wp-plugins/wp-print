@@ -30,5 +30,5 @@
 		</div>
 		<?php $comment_count++; ?>
 	<?php endforeach; ?>
-	<hr class="Divider" align="center" />
+	<hr class="Divider" style="text-align: center;" />
 <?php endif; ?>

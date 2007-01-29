@@ -77,10 +77,15 @@ HR.Divider {
 .CommentContent {
 	padding: 2px 10px 10px 10px;
 }
+@media print {
+    #print-link {
+        display: none;
+    }
+}
 </style>
 </head>
 <body>
-<p align="center"><strong>- <?php bloginfo('name'); ?> - <?php bloginfo('url')?> -</strong></p>
+<p style="text-align: center;"><strong>- <?php bloginfo('name'); ?> - <?php bloginfo('url')?> -</strong></p>
 <center>
 	<div id="Outline">
 		<?php if (have_posts()): ?>
@@ -89,18 +94,18 @@ HR.Divider {
 					<p id="BlogDate"><?php _e('Posted By', 'wp-print'); ?> <u><?php the_author(); ?></u> <?php _e('On', 'wp-print'); ?> <?php the_time(get_option("date_format").' @ '.get_option("time_format")); ?> <?php _e('In', 'wp-print'); ?> <?php print_categories('<u>', '</u>'); ?> | <u><?php print_comments_number(); ?></u></p>
 					<div id="BlogContent"><?php print_content(); ?></div>
 			<?php endwhile; ?>
-			<hr class="Divider" align="center" />
+			<hr class="Divider" style="text-align: center;" />
 			<?php if(print_can('comments')): ?>
 				<?php comments_template(); ?>
 			<?php endif; ?>
-			<p align="left"><?php _e('Article printed from', 'wp-print'); ?> <?php bloginfo('name'); ?>: <strong><?php bloginfo('url'); ?></strong></p>
-			<p align="left"><?php _e('URL to article', 'wp-print'); ?>: <strong><?php the_permalink(); ?></strong></p>
+			<p style="text-align: left;"><?php _e('Article printed from', 'wp-print'); ?> <?php bloginfo('name'); ?>: <strong><?php bloginfo('url'); ?></strong></p>
+			<p style="text-align: left;"><?php _e('URL to article', 'wp-print'); ?>: <strong><?php the_permalink(); ?></strong></p>
 			<?php if(print_can('links')): ?>
-				<p align="left"><?php print_links(); ?></p>
+				<p style="text-align: left;"><?php print_links(); ?></p>
 			<?php endif; ?>
-			<p align="right"><?php _e('Click', 'wp-print'); ?> <a href="#Print" onclick="window.print(); return false;" title="<?php _e('Click here to print.', 'wp-print'); ?>"><?php _e('here', 'wp-print'); ?></a> <?php _e('to print.', 'wp-print'); ?></p>
+			<p style="text-align: right;" id="print-link"><?php _e('Click', 'wp-print'); ?> <a href="#Print" onclick="window.print(); return false;" title="<?php _e('Click here to print.', 'wp-print'); ?>"><?php _e('here', 'wp-print'); ?></a> <?php _e('to print.', 'wp-print'); ?></p>
 		<?php else: ?>
-				<p align="center"><?php _e('No posts matched your criteria.', 'wp-print'); ?></p>
+				<p style="text-align: left;"><?php _e('No posts matched your criteria.', 'wp-print'); ?></p>
 		<?php endif; ?>
 	</div>
 </center>
