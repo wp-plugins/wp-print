@@ -3,7 +3,7 @@
 Plugin Name: WP-Print
 Plugin URI: http://www.lesterchan.net/portfolio/programming.php
 Description: Displays a printable version of your WordPress blog's post/page.
-Version: 2.10
+Version: 2.11
 Author: GaMerZ
 Author URI: http://www.lesterchan.net
 */
@@ -70,6 +70,10 @@ function print_variables($public_query_vars) {
 ### Function: Display Print Link
 function print_link($deprecated = '', $deprecated2 ='') {
 	global $id;
+	if (function_exists('polyglot_get_lang')){
+	    global $polyglot_settings;
+	    $polyglot_append = $polyglot_settings['uri_helpers']['lang_view'].'/'.polyglot_get_lang().'/';
+	}
 	$using_permalink = get_option('permalink_structure');
 	$print_options = get_option('print_options');
 	$print_style = intval($print_options['print_style']);
@@ -80,9 +84,9 @@ function print_link($deprecated = '', $deprecated2 ='') {
 	if(!empty($using_permalink)) {
 		if(is_page()) {
 			$print_text = stripslashes($print_options['page_text']);
-			$print_link = $print_link.'printpage/';
+			$print_link = $print_link.'printpage/'.$polyglot_append;
 		} else {
-			$print_link = $print_link.'print/';
+			$print_link = $print_link.'print/'.$polyglot_append;
 		}
 	} else {
 		if(is_page()) {
