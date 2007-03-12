@@ -98,11 +98,11 @@ function print_link($deprecated = '', $deprecated2 ='') {
 	switch($print_style) {
 		// Icon + Text Link
 		case 1:
-			echo '<img src="'.$print_icon.'" alt="'.$print_text.'" title="'.$print_text.'" border="0" />&nbsp;<a href="'.$print_link.'" title="'.$print_text.'" rel="nofollow">'.$print_text.'</a>'."\n";
+			echo '<img class="WPPrintImage" src="'.$print_icon.'" alt="'.$print_text.'" title="'.$print_text.'" border="0" />&nbsp;<a href="'.$print_link.'" title="'.$print_text.'" rel="nofollow">'.$print_text.'</a>'."\n";
 			break;
 		// Icon Only
 		case 2:
-			echo '<a href="'.$print_link.'" title="'.$print_text.'" rel="nofollow"><img src="'.$print_icon.'" alt="'.$print_text.'" title="'.$print_text.'" border="0" /></a>'."\n";
+			echo '<a href="'.$print_link.'" title="'.$print_text.'" rel="nofollow"><img class="WPPrintImage" src="'.$print_icon.'" alt="'.$print_text.'" title="'.$print_text.'" border="0" /></a>'."\n";
 			break;
 		// Text Link Only
 		case 3:
