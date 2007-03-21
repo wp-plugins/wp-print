@@ -81,6 +81,12 @@ function print_link($deprecated = '', $deprecated2 ='') {
 	$print_icon = get_option('siteurl').'/wp-content/plugins/print/images/'.$print_options['print_icon'];
 	$print_link = get_permalink();
 	$print_html = stripslashes($print_options['print_html']);
+	// Fix For Static Page
+	if(get_option('show_on_front') == page) {		
+		if(intval(get_option('page_on_front')) > 0) {
+			$print_link = _get_page_link();
+		}
+	}
 	if(!empty($using_permalink)) {
 		if(is_page()) {
 			$print_text = stripslashes($print_options['page_text']);
@@ -98,11 +104,11 @@ function print_link($deprecated = '', $deprecated2 ='') {
 	switch($print_style) {
 		// Icon + Text Link
 		case 1:
-			echo '<img class="WPPrintImage" src="'.$print_icon.'" alt="'.$print_text.'" title="'.$print_text.'" border="0" />&nbsp;<a href="'.$print_link.'" title="'.$print_text.'" rel="nofollow">'.$print_text.'</a>'."\n";
+			echo '<img class="WP-PrintIcon" src="'.$print_icon.'" alt="'.$print_text.'" title="'.$print_text.'" style="border: 0px;" />&nbsp;<a href="'.$print_link.'" title="'.$print_text.'" rel="nofollow">'.$print_text.'</a>'."\n";
 			break;
 		// Icon Only
 		case 2:
-			echo '<a href="'.$print_link.'" title="'.$print_text.'" rel="nofollow"><img class="WPPrintImage" src="'.$print_icon.'" alt="'.$print_text.'" title="'.$print_text.'" border="0" /></a>'."\n";
+			echo '<a href="'.$print_link.'" title="'.$print_text.'" rel="nofollow"><img class="WP-PrintIcon" src="'.$print_icon.'" alt="'.$print_text.'" title="'.$print_text.'" style="border: 0px;" /></a>'."\n";
 			break;
 		// Text Link Only
 		case 3:
