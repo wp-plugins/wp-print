@@ -82,7 +82,7 @@ function print_link($deprecated = '', $deprecated2 ='') {
 	$print_link = get_permalink();
 	$print_html = stripslashes($print_options['print_html']);
 	// Fix For Static Page
-	if(get_option('show_on_front') == page) {		
+	if(get_option('show_on_front') == 'page' && is_page()) {	
 		if(intval(get_option('page_on_front')) > 0) {
 			$print_link = _get_page_link();
 		}
