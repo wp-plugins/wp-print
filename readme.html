@@ -288,8 +288,9 @@
 			<div class="SubTitle">&raquo; Changelog</div>
 			<ul>
 				<li>
-					<b>Version 2.11 (01-05-2007)</b>
+					<b>Version 2.11 (01-06-2007)</b>
 					<ul>
+						<li>NEW: Putting [print_link] In Your Post/Page Content Will Display A Link To The Printable Post/Page</li>
 						<li>FIXED: Worked With Polyglot Plugin, Fixed By <a href="http://www.getoto.net/">zeridon</a></li>
 						<li>FIXED: Wrong URL If Front Page Is A Static Page</li>
 					</ul>
@@ -450,6 +451,7 @@
 					<blockquote>
 						&lt;?php if(function_exists('wp_print')) { print_link(); } ?&gt;
 					</blockquote>
+					<p>If you DO NOT want the print link to appear in every post/page, DO NOT use the code above. Just type in <strong>[print_link]</strong> into the selected post/page content and it will embed the print link into that post/page only.</p>
 				</li>
 				<li>
 					Go to <b>'WP-Admin -> Options -> Print'</b> to configure the style of the print text link.

@@ -68,12 +68,13 @@ function print_variables($public_query_vars) {
 
 
 ### Function: Display Print Link
-function print_link($deprecated = '', $deprecated2 ='') {
+function print_link($deprecated = '', $deprecated2 ='', $echo = true) {
 	global $id;
 	if (function_exists('polyglot_get_lang')){
 	    global $polyglot_settings;
 	    $polyglot_append = $polyglot_settings['uri_helpers']['lang_view'].'/'.polyglot_get_lang().'/';
 	}
+	$output = '';
 	$using_permalink = get_option('permalink_structure');
 	$print_options = get_option('print_options');
 	$print_style = intval($print_options['print_style']);
@@ -104,22 +105,27 @@ function print_link($deprecated = '', $deprecated2 ='') {
 	switch($print_style) {
 		// Icon + Text Link
 		case 1:
-			echo '<img class="WP-PrintIcon" src="'.$print_icon.'" alt="'.$print_text.'" title="'.$print_text.'" style="border: 0px;" />&nbsp;<a href="'.$print_link.'" title="'.$print_text.'" rel="nofollow">'.$print_text.'</a>'."\n";
+			$output = '<img class="WP-PrintIcon" src="'.$print_icon.'" alt="'.$print_text.'" title="'.$print_text.'" style="border: 0px;" />&nbsp;<a href="'.$print_link.'" title="'.$print_text.'" rel="nofollow">'.$print_text.'</a>';
 			break;
 		// Icon Only
 		case 2:
-			echo '<a href="'.$print_link.'" title="'.$print_text.'" rel="nofollow"><img class="WP-PrintIcon" src="'.$print_icon.'" alt="'.$print_text.'" title="'.$print_text.'" style="border: 0px;" /></a>'."\n";
+			$output = '<a href="'.$print_link.'" title="'.$print_text.'" rel="nofollow"><img class="WP-PrintIcon" src="'.$print_icon.'" alt="'.$print_text.'" title="'.$print_text.'" style="border: 0px;" /></a>';
 			break;
 		// Text Link Only
 		case 3:
-			echo '<a href="'.$print_link.'" title="'.$print_text.'" rel="nofollow">'.$print_text.'</a>'."\n";
+			$output = '<a href="'.$print_link.'" title="'.$print_text.'" rel="nofollow">'.$print_text.'</a>';
 			break;
 		case 4:
 			$print_html = str_replace("%PRINT_URL%", $print_link, $print_html);
 			$print_html = str_replace("%PRINT_TEXT%", $print_text, $print_html);
 			$print_html = str_replace("%PRINT_ICON_URL%", $print_icon, $print_html);
-			echo $print_html;
+			$output = $print_html;
 			break;
+	}
+	if($echo) {
+		echo $output."\n";
+	} else {
+		return $output;
 	}
 }
 
@@ -127,6 +133,18 @@ function print_link($deprecated = '', $deprecated2 ='') {
 ### Function: Display Print Image Link (Deprecated)
 function print_link_image() {
 	print_link();
+}
+
+
+### Function: Place Print Link
+add_filter('the_content', 'place_printlink', 7);
+function place_printlink($content){
+	if(!is_feed()) {
+		 $content = preg_replace("/\[print_link\]/ise", "print_link('', '', false)", $content);
+	} else {
+		$content = preg_replace("/\[print_link\]/ise", __('Note: You can print this post by visiting the site.', 'wp-print'), $content);
+	}   
+	return $content;
 }
 
 

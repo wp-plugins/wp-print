@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-Print 2.11\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2007-03-22 02:00+0800\n"
+"PO-Revision-Date: 2007-05-06 15:36+0800\n"
 "Last-Translator: Lester 'GaMerZ' Chan <gamerz84@hotmail.com>\n"
 "Language-Team: Lester Chan <gamerz84@hotmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -120,41 +120,45 @@ msgstr ""
 msgid "Print"
 msgstr ""
 
-#: print.php:173
-#: print.php:226
+#: print.php:145
+msgid "Note: You can print this post by visiting the site."
+msgstr ""
+
+#: print.php:191
+#: print.php:244
 msgid "Image"
 msgstr ""
 
-#: print.php:248
+#: print.php:266
 msgid "No Comments"
 msgstr ""
 
-#: print.php:250
+#: print.php:268
 msgid "1 Comment"
 msgstr ""
 
-#: print.php:252
+#: print.php:270
 #, php-format
 msgid "%s Comments"
 msgstr ""
 
-#: print.php:255
+#: print.php:273
 msgid "Comments Disabled"
 msgstr ""
 
-#: print.php:258
+#: print.php:276
 msgid "Comments Hidden"
 msgstr ""
 
-#: print.php:269
+#: print.php:287
 msgid "URLs in this post:"
 msgstr ""
 
-#: print.php:331
+#: print.php:349
 msgid "Print This Post"
 msgstr ""
 
-#: print.php:332
+#: print.php:350
 msgid "Print This Page"
 msgstr ""
 
