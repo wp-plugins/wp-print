@@ -3,7 +3,7 @@ Contributors: GamerZ
 Donate link: http://www.lesterchan.net/wordpress
 Tags: print, printer, wp-print
 Requires at least: 2.1.0
-Stable tag: 2.10
+Stable tag: 2.11
 
 Displays a printable version of your WordPress blog's post/page.
 
