@@ -90,6 +90,9 @@ function print_link($deprecated = '', $deprecated2 ='', $echo = true) {
 	}
 	if(!empty($using_permalink)) {
 		if(is_page()) {
+			if(substr($print_link, -1, 1) != '/') {
+				$print_link = $print_link.'/';
+			}
 			$print_text = stripslashes($print_options['page_text']);
 			$print_link = $print_link.'printpage/'.$polyglot_append;
 		} else {
@@ -140,9 +143,9 @@ function print_link_image() {
 add_filter('the_content', 'place_printlink', 7);
 function place_printlink($content){
 	if(!is_feed()) {
-		 $content = preg_replace("/\[print_link\]/ise", "print_link('', '', false)", $content);
+		 $content = str_replace("[print_link]", print_link('', '', false), $content);
 	} else {
-		$content = preg_replace("/\[print_link\]/ise", __('Note: You can print this post by visiting the site.', 'wp-print'), $content);
+		$content = str_replace("[print_link]", __('Note: You can print this post by visiting the site.', 'wp-print'), $content);
 	}   
 	return $content;
 }
