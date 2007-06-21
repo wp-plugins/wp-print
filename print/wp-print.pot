@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WP-Print 2.11\n"
+"Project-Id-Version: WP-Print 2.12\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2007-06-16 01:30+0800\n"
+"PO-Revision-Date: 2007-06-21 21:08+0800\n"
 "Last-Translator: Lester 'GaMerZ' Chan <gamerz84@hotmail.com>\n"
 "Language-Team: Lester Chan <gamerz84@hotmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -163,19 +163,27 @@ msgid "Print This Page"
 msgstr ""
 
 #: wp-print-comments.php:21
+msgid "Open"
+msgstr ""
+
+#: wp-print-comments.php:21
+msgid "Close"
+msgstr ""
+
+#: wp-print-comments.php:23
 msgid "To"
 msgstr ""
 
-#: wp-print-comments.php:24
+#: wp-print-comments.php:26
 msgid "By"
 msgstr ""
 
-#: wp-print-comments.php:24
+#: wp-print-comments.php:26
 #: wp-print.php:94
 msgid "On"
 msgstr ""
 
-#: wp-print-comments.php:27
+#: wp-print-comments.php:30
 msgid "Your comment is awaiting moderation."
 msgstr ""
 

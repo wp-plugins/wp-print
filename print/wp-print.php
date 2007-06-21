@@ -2,7 +2,7 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.1 Plugin: WP-Print 2.11										|
+|	WordPress 2.1 Plugin: WP-Print 2.12										|
 |	Copyright (c) 2007 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
@@ -91,7 +91,7 @@ HR.Divider {
 		<?php if (have_posts()): ?>
 			<?php while (have_posts()): the_post(); ?>
 					<p id="BlogTitle"><?php the_title(); ?></p>
-					<p id="BlogDate"><?php _e('Posted By', 'wp-print'); ?> <u><?php the_author(); ?></u> <?php _e('On', 'wp-print'); ?> <?php the_time(get_option("date_format").' @ '.get_option("time_format")); ?> <?php _e('In', 'wp-print'); ?> <?php print_categories('<u>', '</u>'); ?> | <u><?php print_comments_number(); ?></u></p>
+					<p id="BlogDate"><?php _e('Posted By', 'wp-print'); ?> <u><?php the_author(); ?></u> <?php _e('On', 'wp-print'); ?> <?php the_time(get_option("date_format").' @ '.get_option("time_format")); ?> <?php _e('In', 'wp-print'); ?> <?php print_categories('<u>', '</u>'); ?> | <u><a href='#comments_controls'><?php print_comments_number(); ?></a></u></p>
 					<div id="BlogContent"><?php print_content(); ?></div>
 			<?php endwhile; ?>
 			<hr class="Divider" style="text-align: center;" />
