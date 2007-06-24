@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WP-Print 2.12\n"
+"Project-Id-Version: WP-Print 2.20\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2007-06-21 21:08+0800\n"
+"PO-Revision-Date: 2007-06-25 00:08+0800\n"
 "Last-Translator: Lester 'GaMerZ' Chan <gamerz84@hotmail.com>\n"
 "Language-Team: Lester Chan <gamerz84@hotmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -14,106 +14,161 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: print-options.php:39
-#: print-options.php:81
-#: print-options.php:148
-msgid "Print Options"
-msgstr ""
-
-#: print-options.php:44
-msgid "Updated"
-msgstr ""
-
-#: print-options.php:49
-msgid "No Print Option Updated"
-msgstr ""
-
-#: print-options.php:84
-msgid "Print Styles"
-msgstr ""
-
-#: print-options.php:87
-msgid "Print Text Link For Post"
-msgstr ""
-
-#: print-options.php:93
-msgid "Print Text Link For Page"
-msgstr ""
-
-#: print-options.php:99
-msgid "Print Icon"
-msgstr ""
-
-#: print-options.php:127
-msgid "Print Text Link Style"
-msgstr ""
-
-#: print-options.php:130
-msgid "Print Icon With Text Link"
-msgstr ""
-
-#: print-options.php:131
-msgid "Print Icon Only"
-msgstr ""
-
-#: print-options.php:132
-msgid "Print Text Link Only"
-msgstr ""
-
-#: print-options.php:133
-msgid "Custom"
-msgstr ""
-
-#: print-options.php:137
-msgid "HTML is allowed."
-msgstr ""
-
-#: print-options.php:138
-msgid "URL to the printable post/page."
-msgstr ""
-
-#: print-options.php:139
-msgid "Print text link of the post/page that you have typed in above."
-msgstr ""
-
-#: print-options.php:140
-msgid "URL to the print icon you have chosen above."
-msgstr ""
-
-#: print-options.php:141
-msgid "Restore Default Template"
-msgstr ""
-
-#: print-options.php:151
-msgid "Print Comments?"
-msgstr ""
-
-#: print-options.php:154
-#: print-options.php:163
-#: print-options.php:172
-msgid "Yes"
-msgstr ""
-
-#: print-options.php:155
-#: print-options.php:164
-#: print-options.php:173
-msgid "No"
-msgstr ""
-
-#: print-options.php:160
-msgid "Print Links?"
-msgstr ""
-
-#: print-options.php:169
-msgid "Print Images?"
-msgstr ""
-
-#: print-options.php:180
+#: print-options.php:32
+#: print-options.php:225
 msgid "Update Options"
 msgstr ""
 
-#: print-options.php:180
+#: print-options.php:45
+#: print-options.php:127
+#: print-options.php:193
+msgid "Print Options"
+msgstr ""
+
+#: print-options.php:50
+msgid "Updated"
+msgstr ""
+
+#: print-options.php:55
+msgid "No Print Option Updated"
+msgstr ""
+
+#: print-options.php:59
+#: print-options.php:263
+msgid "UNINSTALL WP-Print"
+msgstr ""
+
+#: print-options.php:67
+#, php-format
+msgid "Setting Key '%s' has been deleted."
+msgstr ""
+
+#: print-options.php:71
+#, php-format
+msgid "Error deleting Setting Key '%s'."
+msgstr ""
+
+#: print-options.php:93
+#: print-options.php:233
+msgid "Uninstall WP-Print"
+msgstr ""
+
+#: print-options.php:94
+#, php-format
+msgid "<a href=\"%s\">Click Here</a> To Finish The Uninstallation And WP-Print Will Be Deactivated Automatically."
+msgstr ""
+
+#: print-options.php:129
+msgid "Print Styles"
+msgstr ""
+
+#: print-options.php:132
+msgid "Print Text Link For Post"
+msgstr ""
+
+#: print-options.php:138
+msgid "Print Text Link For Page"
+msgstr ""
+
+#: print-options.php:144
+msgid "Print Icon"
+msgstr ""
+
+#: print-options.php:172
+msgid "Print Text Link Style"
+msgstr ""
+
+#: print-options.php:175
+msgid "Print Icon With Text Link"
+msgstr ""
+
+#: print-options.php:176
+msgid "Print Icon Only"
+msgstr ""
+
+#: print-options.php:177
+msgid "Print Text Link Only"
+msgstr ""
+
+#: print-options.php:178
+msgid "Custom"
+msgstr ""
+
+#: print-options.php:182
+msgid "HTML is allowed."
+msgstr ""
+
+#: print-options.php:183
+msgid "URL to the printable post/page."
+msgstr ""
+
+#: print-options.php:184
+msgid "Print text link of the post/page that you have typed in above."
+msgstr ""
+
+#: print-options.php:185
+msgid "URL to the print icon you have chosen above."
+msgstr ""
+
+#: print-options.php:186
+msgid "Restore Default Template"
+msgstr ""
+
+#: print-options.php:196
+msgid "Print Comments?"
+msgstr ""
+
+#: print-options.php:199
+#: print-options.php:208
+#: print-options.php:217
+#: print-options.php:262
+msgid "Yes"
+msgstr ""
+
+#: print-options.php:200
+#: print-options.php:209
+#: print-options.php:218
+msgid "No"
+msgstr ""
+
+#: print-options.php:205
+msgid "Print Links?"
+msgstr ""
+
+#: print-options.php:214
+msgid "Print Images?"
+msgstr ""
+
+#: print-options.php:225
 msgid "Cancel"
+msgstr ""
+
+#: print-options.php:235
+msgid "Deactivating WP-Print plugin does not remove any data that may have been created, such as the print options. To completely remove this plugin, you can uninstall it here."
+msgstr ""
+
+#: print-options.php:238
+msgid "WARNING:"
+msgstr ""
+
+#: print-options.php:239
+msgid "Once uninstalled, this cannot be undone. You should use a Database Backup plugin of WordPress to back up all the data first."
+msgstr ""
+
+#: print-options.php:242
+msgid "The following WordPress Options/PostMetas will be DELETED:"
+msgstr ""
+
+#: print-options.php:246
+msgid "WordPress Options"
+msgstr ""
+
+#: print-options.php:263
+msgid ""
+"You Are About To Uninstall WP-Print From WordPress.\\n"
+"This Action Is Not Reversible.\\n"
+"\\n"
+" Choose [Cancel] To Stop, [OK] To Uninstall."
 msgstr ""
 
 #: print.php:39
@@ -154,11 +209,11 @@ msgstr ""
 msgid "URLs in this post:"
 msgstr ""
 
-#: print.php:352
+#: print.php:350
 msgid "Print This Post"
 msgstr ""
 
-#: print.php:353
+#: print.php:351
 msgid "Print This Page"
 msgstr ""
 

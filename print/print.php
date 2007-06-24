@@ -3,7 +3,7 @@
 Plugin Name: WP-Print
 Plugin URI: http://www.lesterchan.net/portfolio/programming.php
 Description: Displays a printable version of your WordPress blog's post/page.
-Version: 2.12
+Version: 2.20
 Author: Lester 'GaMerZ' Chan
 Author URI: http://www.lesterchan.net
 */
@@ -108,7 +108,7 @@ function print_link($deprecated = '', $deprecated2 ='', $echo = true) {
 	switch($print_style) {
 		// Icon + Text Link
 		case 1:
-			$output = '<img class="WP-PrintIcon" src="'.$print_icon.'" alt="'.$print_text.'" title="'.$print_text.'" style="border: 0px;" />&nbsp;<a href="'.$print_link.'" title="'.$print_text.'" rel="nofollow">'.$print_text.'</a>';
+			$output = '<a href="'.$print_link.'" title="'.$print_text.'" rel="nofollow"><img class="WP-PrintIcon" src="'.$print_icon.'" alt="'.$print_text.'" title="'.$print_text.'" style="border: 0px;" /></a>&nbsp;<a href="'.$print_link.'" title="'.$print_text.'" rel="nofollow">'.$print_text.'</a>';
 			break;
 		// Icon Only
 		case 2:
@@ -345,8 +345,6 @@ function str_replace_one($search, $replace, $content){
 ### Function: Print Options
 add_action('activate_print/print.php', 'print_init');
 function print_init() {
-	// Delete Options First
-	delete_option('print_options');
 	// Add Options
 	$print_options = array();
 	$print_options['post_text'] = __('Print This Post', 'wp-print');
