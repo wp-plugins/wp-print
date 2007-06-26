@@ -55,7 +55,7 @@ if(!empty($_POST['do'])) {
 				$text = '<font color="red">'.__('No Print Option Updated', 'wp-print').'</font>';
 			}
 			break;
-		//  Uninstall WP-Print
+		// Uninstall WP-Print
 		case __('UNINSTALL WP-Print', 'wp-print') :
 			if(trim($_POST['uninstall_print_yes']) == 'yes') {
 				echo '<div id="message" class="updated fade">';
@@ -239,7 +239,7 @@ switch($mode) {
 		<?php _e('Once uninstalled, this cannot be undone. You should use a Database Backup plugin of WordPress to back up all the data first.', 'wp-print'); ?>
 	</p>
 	<p style="text-align: left; color: red">
-		<strong><?php _e('The following WordPress Options/PostMetas will be DELETED:', 'wp-print'); ?></strong><br />
+		<strong><?php _e('The following WordPress Options will be DELETED:', 'wp-print'); ?></strong><br />
 	</p>
 	<table width="70%"  border="0" cellspacing="3" cellpadding="3">
 		<tr class="thead">

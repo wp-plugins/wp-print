@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-Print 2.20\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2007-06-25 00:08+0800\n"
+"PO-Revision-Date: 2007-06-26 15:36+0800\n"
 "Last-Translator: Lester 'GaMerZ' Chan <gamerz84@hotmail.com>\n"
 "Language-Team: Lester Chan <gamerz84@hotmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -156,7 +156,7 @@ msgid "Once uninstalled, this cannot be undone. You should use a Database Backup
 msgstr ""
 
 #: print-options.php:242
-msgid "The following WordPress Options/PostMetas will be DELETED:"
+msgid "The following WordPress Options will be DELETED:"
 msgstr ""
 
 #: print-options.php:246
