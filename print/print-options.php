@@ -183,7 +183,7 @@ switch($mode) {
 						%PRINT_URL% - <?php _e('URL to the printable post/page.', 'wp-print'); ?><br />
 						%PRINT_TEXT% - <?php _e('Print text link of the post/page that you have typed in above.', 'wp-print'); ?><br />
 						%PRINT_ICON_URL% - <?php _e('URL to the print icon you have chosen above.', 'wp-print'); ?><br />
-						<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template', 'wp-print'); ?>" onclick="javascript: print_default_templates('html');" class="button" />
+						<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template', 'wp-print'); ?>" onclick="print_default_templates('html');" class="button" />
 					</div>
 				</td>
 			</tr>
