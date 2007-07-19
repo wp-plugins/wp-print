@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-Print 2.20\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2007-07-19 15:14+0800\n"
+"PO-Revision-Date: 2007-07-20 04:42+0800\n"
 "Last-Translator: Lester 'GaMerZ' Chan <gamerz84@hotmail.com>\n"
 "Language-Team: Lester Chan <gamerz84@hotmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -188,7 +188,7 @@ msgid "Print"
 msgstr ""
 
 #: print.php:148
-msgid "Note: You can print this post by visiting the site."
+msgid "Note: There is a print link embedded within this post, please visit this post to print it."
 msgstr ""
 
 #: print.php:194
@@ -248,6 +248,12 @@ msgstr ""
 #: wp-print-comments.php:26
 #: wp-print.php:97
 msgid "On"
+msgstr ""
+
+#: wp-print-comments.php:26
+#: wp-print.php:97
+#, php-format
+msgid "%s @ %s"
 msgstr ""
 
 #: wp-print-comments.php:30

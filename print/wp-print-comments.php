@@ -23,7 +23,7 @@
 		<p id="CommentTitle"><?php print_comments_number(); ?> <?php _e('To', 'wp-print'); ?> "<?php the_title(); ?>"</p>				
 		<?php foreach ($comments as $comment) : ?>					
 			<p class="CommentDate">
-				<strong>#<?php echo $comment_count; ?> <?php comment_type(); ?></strong> <?php _e('By', 'wp-print'); ?> <u><?php comment_author(); ?></u> <?php _e('On', 'wp-print'); ?> <?php comment_date(get_option("date_format").' @ '.get_option("time_format")); ?>
+				<strong>#<?php echo $comment_count; ?> <?php comment_type(); ?></strong> <?php _e('By', 'wp-print'); ?> <u><?php comment_author(); ?></u> <?php _e('On', 'wp-print'); ?> <?php comment_date(sprintf(__('%s @ %s', 'wp-print'), get_option('date_format'), get_option('time_format'))); ?>
 			</p>
 			<div class="CommentContent">
 				<?php if ($comment->comment_approved == '0') : ?>

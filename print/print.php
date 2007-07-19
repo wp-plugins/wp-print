@@ -145,7 +145,7 @@ function place_printlink($content){
 	if(!is_feed()) {
 		 $content = str_replace("[print_link]", print_link('', '', false), $content);
 	} else {
-		$content = str_replace("[print_link]", __('Note: You can print this post by visiting the site.', 'wp-print'), $content);
+		$content = str_replace("[print_link]", __('Note: There is a print link embedded within this post, please visit this post to print it.', 'wp-print'), $content);
 	}   
 	return $content;
 }
