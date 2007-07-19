@@ -26,6 +26,9 @@ add_action('init', 'print_content');
 ### Filters
 add_filter('wp_title', 'print_pagetitle');
 add_filter('comments_template', 'print_template_comments');
+
+### Print Options
+$print_options = get_option('print_options');
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -109,5 +112,6 @@ HR.Divider {
 		<?php endif; ?>
 	</div>
 </center>
+<p style="text-align: center;"><?php echo stripslashes($print_options['disclaimer']); ?></p>
 </body>
 </html>

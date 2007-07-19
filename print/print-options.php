@@ -39,6 +39,7 @@ if(!empty($_POST['do'])) {
 			$print_options['comments'] = intval($_POST['print_comments']);
 			$print_options['links'] = intval($_POST['print_links']);
 			$print_options['images'] = intval($_POST['print_images']);
+			$print_options['disclaimer'] = trim($_POST['print_disclaimer']);
 			$update_print_queries = array();
 			$update_print_text = array();
 			$update_print_queries[] = update_option('print_options', $print_options);
@@ -115,6 +116,9 @@ switch($mode) {
 		switch(template) {
 			case 'html':
 				default_template = '<a href="%PRINT_URL%" rel="nofollow" title="%PRINT_TEXT%">%PRINT_TEXT%</a>';
+				break;
+			case 'disclaimer':
+				default_template = '<?php printf(__('Copyright &copy; %s %s. All rights reserved.', 'wp-print'), date('Y'), get_option('blogname')); ?>';
 				break;
 		}
 		document.getElementById("print_template_" + template).value = default_template;
@@ -217,6 +221,16 @@ switch($mode) {
 						<option value="1"<?php selected('1', $print_options['images']); ?>><?php _e('Yes', 'wp-print'); ?></option>
 						<option value="0"<?php selected('0', $print_options['images']); ?>><?php _e('No', 'wp-print'); ?></option>
 					</select>
+				</td> 
+			</tr>
+			<tr valign="top"> 
+				<th align="left" width="30%">				
+					<?php _e('Disclaimer/Copyright Text?', 'wp-print'); ?>
+					<br /><br />
+					<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template', 'wp-print'); ?>" onclick="print_default_templates('disclaimer');" class="button" />
+				</th>
+				<td align="left">
+					<textarea rows="2" cols="80" name="print_disclaimer" id="print_template_disclaimer"><?php echo htmlspecialchars(stripslashes($print_options['disclaimer'])); ?></textarea><br /><?php _e('HTML is allowed.', 'wp-print'); ?><br />					
 				</td> 
 			</tr>
 		</table>

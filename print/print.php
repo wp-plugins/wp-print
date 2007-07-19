@@ -355,6 +355,7 @@ function print_init() {
 	$print_options['comments'] = 0;
 	$print_options['links'] = 1;
 	$print_options['images'] = 1;
+	$print_options['disclaimer'] = sprintf(__('Copyright &copy; %s %s. All rights reserved.', 'wp-print'), date('Y'), get_option('blogname'));
 	add_option('print_options', $print_options, 'Print Options');
 }
 ?>
