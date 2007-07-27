@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-Print 2.20\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2007-07-25 02:19+0800\n"
+"PO-Revision-Date: 2007-07-27 13:06+0800\n"
 "Last-Translator: Lester 'GaMerZ' Chan <gamerz84@hotmail.com>\n"
 "Language-Team: Lester Chan <gamerz84@hotmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -59,7 +59,7 @@ msgid "<a href=\"%s\">Click Here</a> To Finish The Uninstallation And WP-Print W
 msgstr ""
 
 #: print-options.php:121
-#: print.php:358
+#: print.php:364
 #, php-format
 msgid "Copyright &copy; %s %s. All rights reserved."
 msgstr ""
@@ -187,45 +187,45 @@ msgstr ""
 msgid "Print"
 msgstr ""
 
-#: print.php:148
+#: print.php:154
 msgid "Note: There is a print link embedded within this post, please visit this post to print it."
 msgstr ""
 
-#: print.php:194
-#: print.php:247
+#: print.php:200
+#: print.php:253
 msgid "Image"
 msgstr ""
 
-#: print.php:269
+#: print.php:275
 msgid "No Comments"
 msgstr ""
 
-#: print.php:271
+#: print.php:277
 msgid "1 Comment"
 msgstr ""
 
-#: print.php:273
+#: print.php:279
 #, php-format
 msgid "%s Comments"
 msgstr ""
 
-#: print.php:276
+#: print.php:282
 msgid "Comments Disabled"
 msgstr ""
 
-#: print.php:279
+#: print.php:285
 msgid "Comments Hidden"
 msgstr ""
 
-#: print.php:290
+#: print.php:296
 msgid "URLs in this post:"
 msgstr ""
 
-#: print.php:350
+#: print.php:356
 msgid "Print This Post"
 msgstr ""
 
-#: print.php:351
+#: print.php:357
 msgid "Print This Page"
 msgstr ""
 

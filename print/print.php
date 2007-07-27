@@ -46,7 +46,13 @@ add_filter('generate_rewrite_rules', 'print_rewrite');
 function print_rewrite($wp_rewrite) {
 	$r_rule = '';
 	$r_link = '';
-	$rewrite_rules2 = $wp_rewrite->generate_rewrite_rule($wp_rewrite->permalink_structure.'print');
+	$print_link = get_permalink();
+	if(substr($print_link, -1, 1) != '/') {
+		$print_link_text = '/print';
+	} else {
+		$print_link_text = 'print';
+	}
+	$rewrite_rules2 = $wp_rewrite->generate_rewrite_rule($wp_rewrite->permalink_structure.$print_link_text);
 	array_splice($rewrite_rules2, 1);
 	$r_rule = array_keys($rewrite_rules2);
 	$r_rule = array_shift($r_rule);
@@ -89,10 +95,10 @@ function print_link($deprecated = '', $deprecated2 ='', $echo = true) {
 		}
 	}
 	if(!empty($using_permalink)) {
+		if(substr($print_link, -1, 1) != '/') {
+			$print_link = $print_link.'/';
+		}
 		if(is_page()) {
-			if(substr($print_link, -1, 1) != '/') {
-				$print_link = $print_link.'/';
-			}
 			$print_text = stripslashes($print_options['page_text']);
 			$print_link = $print_link.'printpage/'.$polyglot_append;
 		} else {
