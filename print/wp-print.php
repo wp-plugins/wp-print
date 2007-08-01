@@ -33,59 +33,10 @@ $print_options = get_option('print_options');
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title><?php bloginfo('name'); ?> <?php wp_title(); ?></title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="Robots" content="noindex, nofollow" />
-<style type="text/css" media="screen, print">
-Body {
-	font-family: Verdana, Arial, Tahoma;
-	font-size: 12px;
-	color: #000000;
-}
-#Outline {
-	text-align: left;
-	width: 90%;
-	margin-left: auto; 
-	margin-right: auto;
-	padding: 10px;
-	border: 1px solid #000000;
-}
-#BlogTitle {
-	font-weight: bold;
-	font-size: 16px;
-	margin-bottom: 5px;
-}
-#BlogDate {
-	margin-top: 5px;
-	margin-bottom: 10px;	
-}
-#BlogContent {
-	padding: 10px;
-	margin-top: 10px;
-}
-HR.Divider {
-	width: 80%; 
-	height: 1px; 
-	color: #000000;
-}
-#CommentTitle {
-	font-weight: bold;
-	font-size: 16px;
-	padding-bottom: 10px;
-}
-.CommentDate {
-	margin-top: 5px;
-	margin-bottom: 10px;
-}
-.CommentContent {
-	padding: 2px 10px 10px 10px;
-}
-@media print {
-    #print-link {
-        display: none;
-    }
-}
-</style>
+	<title><?php bloginfo('name'); ?> <?php wp_title(); ?></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="Robots" content="noindex, nofollow" />
+	<link rel="stylesheet" href="<?php bloginfo('wpurl'); ?>/wp-content/plugins/print/wp-print-css.css" type="text/css" media="screen, print" />
 </head>
 <body>
 <p style="text-align: center;"><strong>- <?php bloginfo('name'); ?> - <?php bloginfo('url')?> -</strong></p>

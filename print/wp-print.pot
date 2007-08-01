@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-Print 2.20\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2007-07-27 13:06+0800\n"
+"PO-Revision-Date: 2007-08-01 16:50+0800\n"
 "Last-Translator: Lester 'GaMerZ' Chan <gamerz84@hotmail.com>\n"
 "Language-Team: Lester Chan <gamerz84@hotmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -246,12 +246,12 @@ msgid "By"
 msgstr ""
 
 #: wp-print-comments.php:26
-#: wp-print.php:97
+#: wp-print.php:48
 msgid "On"
 msgstr ""
 
 #: wp-print-comments.php:26
-#: wp-print.php:97
+#: wp-print.php:48
 #, php-format
 msgid "%s @ %s"
 msgstr ""
@@ -260,39 +260,39 @@ msgstr ""
 msgid "Your comment is awaiting moderation."
 msgstr ""
 
-#: wp-print.php:97
+#: wp-print.php:48
 msgid "Posted By"
 msgstr ""
 
-#: wp-print.php:97
+#: wp-print.php:48
 msgid "In"
 msgstr ""
 
-#: wp-print.php:104
+#: wp-print.php:55
 msgid "Article printed from"
 msgstr ""
 
-#: wp-print.php:105
+#: wp-print.php:56
 msgid "URL to article"
 msgstr ""
 
-#: wp-print.php:109
+#: wp-print.php:60
 msgid "Click"
 msgstr ""
 
-#: wp-print.php:109
+#: wp-print.php:60
 msgid "Click here to print."
 msgstr ""
 
-#: wp-print.php:109
+#: wp-print.php:60
 msgid "here"
 msgstr ""
 
-#: wp-print.php:109
+#: wp-print.php:60
 msgid "to print."
 msgstr ""
 
-#: wp-print.php:111
+#: wp-print.php:62
 msgid "No posts matched your criteria."
 msgstr ""
 
