@@ -147,6 +147,7 @@ function print_link_image() {
 
 ### Function: Place Print Link
 add_filter('the_content', 'place_printlink', 7);
+add_filter('the_excerpt', 'place_printlink', 7);
 function place_printlink($content){
 	if(!is_feed()) {
 		 $content = str_replace("[print_link]", print_link('', '', false), $content);
