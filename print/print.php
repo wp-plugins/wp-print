@@ -47,7 +47,7 @@ function print_rewrite($wp_rewrite) {
 	$r_rule = '';
 	$r_link = '';
 	$print_link = get_permalink();
-	if(substr($print_link, -1, 1) != '/') {
+	if(substr($print_link, -1, 1) != '/' && substr($wp_rewrite->permalink_structure, -1, 1) != '/') {
 		$print_link_text = '/print';
 	} else {
 		$print_link_text = 'print';
