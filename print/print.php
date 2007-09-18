@@ -29,7 +29,10 @@ Author URI: http://lesterchan.net
 
 
 ### Create Text Domain For Translations
-load_plugin_textdomain('wp-print', 'wp-content/plugins/print');
+add_action('init', 'print_textdomain');
+function print_textdomain() {
+	load_plugin_textdomain('wp-print', 'wp-content/plugins/print');
+}
 
 
 ### Function: Print Option Menu

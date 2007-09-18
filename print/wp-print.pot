@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-Print 2.20\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2007-09-06 22:44+0800\n"
+"PO-Revision-Date: 2007-09-19 00:20+0800\n"
 "Last-Translator: Lester 'GaMerZ' Chan <gamerz84@hotmail.com>\n"
 "Language-Team: Lester Chan <gamerz84@hotmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -59,7 +59,7 @@ msgid "<a href=\"%s\">Click Here</a> To Finish The Uninstallation And WP-Print W
 msgstr ""
 
 #: print-options.php:121
-#: print.php:365
+#: print.php:368
 #, php-format
 msgid "Copyright &copy; %s %s. All rights reserved."
 msgstr ""
@@ -183,49 +183,49 @@ msgid ""
 " Choose [Cancel] To Stop, [OK] To Uninstall."
 msgstr ""
 
-#: print.php:39
+#: print.php:42
 msgid "Print"
 msgstr ""
 
-#: print.php:155
+#: print.php:158
 msgid "Note: There is a print link embedded within this post, please visit this post to print it."
 msgstr ""
 
-#: print.php:201
-#: print.php:254
+#: print.php:204
+#: print.php:257
 msgid "Image"
 msgstr ""
 
-#: print.php:276
+#: print.php:279
 msgid "No Comments"
 msgstr ""
 
-#: print.php:278
+#: print.php:281
 msgid "1 Comment"
 msgstr ""
 
-#: print.php:280
+#: print.php:283
 #, php-format
 msgid "%s Comments"
 msgstr ""
 
-#: print.php:283
+#: print.php:286
 msgid "Comments Disabled"
 msgstr ""
 
-#: print.php:286
+#: print.php:289
 msgid "Comments Hidden"
 msgstr ""
 
-#: print.php:297
+#: print.php:300
 msgid "URLs in this post:"
 msgstr ""
 
-#: print.php:357
+#: print.php:360
 msgid "Print This Post"
 msgstr ""
 
-#: print.php:358
+#: print.php:361
 msgid "Print This Page"
 msgstr ""
 
