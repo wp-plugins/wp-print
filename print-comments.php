@@ -2,7 +2,7 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.1 Plugin: WP-Print 2.20										|
+|	WordPress 2.1 Plugin: WP-Print 2.30										|
 |	Copyright (c) 2007 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
@@ -11,7 +11,7 @@
 |																							|
 |	File Information:																	|
 |	- Printer Friendly Page For Comments										|
-|	- wp-print-comments.php														|
+|	- wp-content/plugins/wp-print/print-comments.php					|
 |																							|
 +----------------------------------------------------------------+
 */

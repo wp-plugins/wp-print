@@ -3,7 +3,7 @@
 Plugin Name: WP-Print
 Plugin URI: http://lesterchan.net/portfolio/programming.php
 Description: Displays a printable version of your WordPress blog's post/page.
-Version: 2.20
+Version: 2.30
 Author: Lester 'GaMerZ' Chan
 Author URI: http://lesterchan.net
 */
@@ -31,7 +31,7 @@ Author URI: http://lesterchan.net
 ### Create Text Domain For Translations
 add_action('init', 'print_textdomain');
 function print_textdomain() {
-	load_plugin_textdomain('wp-print', 'wp-content/plugins/print');
+	load_plugin_textdomain('wp-print', 'wp-content/plugins/wp-print');
 }
 
 
@@ -39,7 +39,7 @@ function print_textdomain() {
 add_action('admin_menu', 'print_menu');
 function print_menu() {
 	if (function_exists('add_options_page')) {
-		add_options_page(__('Print', 'wp-print'), __('Print', 'wp-print'), 'manage_options', 'print/print-options.php') ;
+		add_options_page(__('Print', 'wp-print'), __('Print', 'wp-print'), 'manage_options', 'wp-print/print-options.php') ;
 	}
 }
 
@@ -47,6 +47,7 @@ function print_menu() {
 ### Function: Print htaccess ReWrite Rules
 add_filter('generate_rewrite_rules', 'print_rewrite');
 function print_rewrite($wp_rewrite) {
+	// Print Rules For Posts
 	$r_rule = '';
 	$r_link = '';
 	$print_link = get_permalink();
@@ -55,16 +56,33 @@ function print_rewrite($wp_rewrite) {
 	} else {
 		$print_link_text = 'print';
 	}
-	$rewrite_rules2 = $wp_rewrite->generate_rewrite_rule($wp_rewrite->permalink_structure.$print_link_text);
-	array_splice($rewrite_rules2, 1);
-	$r_rule = array_keys($rewrite_rules2);
+	$rewrite_rules = $wp_rewrite->generate_rewrite_rule($wp_rewrite->permalink_structure.$print_link_text, EP_PERMALINK);
+	array_splice($rewrite_rules, 1);
+	$r_rule = array_keys($rewrite_rules);
 	$r_rule = array_shift($r_rule);
 	$r_rule = str_replace('/trackback', '',$r_rule);
-	$r_link = array_values($rewrite_rules2);
+	$r_link = array_values($rewrite_rules);
 	$r_link = array_shift($r_link);
-	$r_link = str_replace('tb=1', 'print=1', $r_link); 
-    $print_rules = array($r_rule => $r_link, '(.+)/printpage/?$' => 'index.php?pagename='.$wp_rewrite->preg_index(1).'&print=1');
-    $wp_rewrite->rules = $print_rules + $wp_rewrite->rules;
+	$r_link = str_replace('tb=1', 'print=1', $r_link);
+	$wp_rewrite->rules = array_merge(array($r_rule => $r_link), $wp_rewrite->rules);
+	// Print Rules For Pages
+	$uris = get_option('page_uris');
+	if(is_array($uris)) {
+		$print_page_rules = array();
+		foreach ($uris as $uri => $pagename) {			
+			$wp_rewrite->add_rewrite_tag('%pagename%', "($uri)", 'pagename=');
+			$rewrite_rules = $wp_rewrite->generate_rewrite_rules($wp_rewrite->get_page_permastruct().'/printpage', EP_PAGES);
+			array_splice($rewrite_rules, 1);
+			$r_rule = array_keys($rewrite_rules);
+			$r_rule = array_shift($r_rule);
+			$r_rule = str_replace('/trackback', '',$r_rule);
+			$r_link = array_values($rewrite_rules);
+			$r_link = array_shift($r_link);
+			$r_link = str_replace('tb=1', 'print=1', $r_link);
+			$print_page_rules = array_merge($print_page_rules, array($r_rule => $r_link));
+		}
+		$wp_rewrite->rules = array_merge($print_page_rules, $wp_rewrite->rules);
+	}
 }
 
 
@@ -72,12 +90,13 @@ function print_rewrite($wp_rewrite) {
 add_filter('query_vars', 'print_variables');
 function print_variables($public_query_vars) {
 	$public_query_vars[] = 'print';
+	$public_query_vars[] = 'printpage';
 	return $public_query_vars;
 }
 
 
 ### Function: Display Print Link
-function print_link($deprecated = '', $deprecated2 ='', $echo = true) {
+function print_link($print_post_text = '', $print_page_text = '', $echo = true) {
 	global $id;
 	if (function_exists('polyglot_get_lang')){
 	    global $polyglot_settings;
@@ -87,8 +106,12 @@ function print_link($deprecated = '', $deprecated2 ='', $echo = true) {
 	$using_permalink = get_option('permalink_structure');
 	$print_options = get_option('print_options');
 	$print_style = intval($print_options['print_style']);
-	$print_text = stripslashes($print_options['post_text']);
-	$print_icon = get_option('siteurl').'/wp-content/plugins/print/images/'.$print_options['print_icon'];
+	if(empty($print_post_text)) {
+		$print_text = stripslashes($print_options['post_text']);
+	} else {
+		$print_text  = $print_post_text;
+	}
+	$print_icon = get_option('siteurl').'/wp-content/plugins/wp-print/images/'.$print_options['print_icon'];
 	$print_link = get_permalink();
 	$print_html = stripslashes($print_options['print_html']);
 	// Fix For Static Page
@@ -102,14 +125,22 @@ function print_link($deprecated = '', $deprecated2 ='', $echo = true) {
 			$print_link = $print_link.'/';
 		}
 		if(is_page()) {
-			$print_text = stripslashes($print_options['page_text']);
+			if(empty($print_page_text)) {
+				$print_text = stripslashes($print_options['page_text']);
+			} else {
+				$print_text = $print_page_text;
+			}
 			$print_link = $print_link.'printpage/'.$polyglot_append;
 		} else {
 			$print_link = $print_link.'print/'.$polyglot_append;
 		}
 	} else {
 		if(is_page()) {
-			$print_text = stripslashes($print_options['page_text']);
+			if(empty($print_page_text)) {
+				$print_text = stripslashes($print_options['page_text']);
+			} else {
+				$print_text = $print_page_text;
+			}
 		}
 		$print_link = $print_link.'&amp;print=1';
 	}
@@ -308,8 +339,8 @@ function print_links($text_links = '') {
 ### Function: Load WP-Print
 add_action('template_redirect', 'wp_print');
 function wp_print() {
-	if(intval(get_query_var('print')) == 1) {
-		include(ABSPATH.'wp-content/plugins/print/wp-print.php');
+	if(intval(get_query_var('print')) == 1 || intval(get_query_var('printpage')) == 1) {
+		include(ABSPATH.'wp-content/plugins/wp-print/print-posts.php');
 		exit;
 	}
 }
@@ -317,7 +348,7 @@ function wp_print() {
 
 ### Function: Add Print Comments Template
 function print_template_comments($file = '') {
-	$file = ABSPATH.'wp-content/plugins/print/wp-print-comments.php';
+	$file = ABSPATH.'wp-content/plugins/wp-print/print-comments.php';
 	return $file;
 }
 
@@ -353,7 +384,7 @@ function str_replace_one($search, $replace, $content){
 
 
 ### Function: Print Options
-add_action('activate_print/print.php', 'print_init');
+add_action('activate_wp-print/wp-print.php', 'print_init');
 function print_init() {
 	// Add Options
 	$print_options = array();

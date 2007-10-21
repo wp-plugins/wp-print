@@ -2,7 +2,7 @@
 <html>
 <head>	
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<title>WP-Print 2.20 Readme</title>
+	<title>WP-Print 2.30 Readme</title>
 	<style type="text/css" media="screen">
 		/* Default Style */
 		BODY {
@@ -203,7 +203,7 @@
 <body>
 <div id="Container">
 	<!-- Title -->
-	<div id="Title">WP-Print 2.20&nbsp;&nbsp;&nbsp;<span style="color: #aaaaaa;">Readme</span></div>
+	<div id="Title">WP-Print 2.30&nbsp;&nbsp;&nbsp;<span style="color: #aaaaaa;">Readme</span></div>
 
 	<!-- Tabs -->
 	<ul id="Tabs">
@@ -225,15 +225,6 @@
 				<strong>&raquo;</strong> Lester 'GaMerZ' Chan
 			</p>
 			<p>
-				<strong>EMail:</strong><br />
-				<strong>&raquo;</strong>
-				<script type="text/javascript">
-					/* <![CDATA[*/
-					document.write(' <a href="mailto:gamerz84@hotmail.com?Subject=WP-Print%202.20%20Support" title="EMail To gamerz84@hotmail.com">gamerz84@hotmail.com</a>');
-					/* ]]> */
-				</script>
-			</p>
-			<p>
 				<strong>Website:</strong><br />
 				<strong>&raquo;</strong> <a href="http://lesterchan.net/" title="http://lesterchan.net/">http://lesterchan.net/</a>
 			</p>
@@ -243,7 +234,7 @@
 			</p>
 			<p>
 				<strong>Download:</strong><br />
-				<strong>&raquo;</strong> <a href="http://lesterchan.net/others/downloads.php?id=12" title="http://lesterchan.net/others/downloads.php?id=12">WP-Print 2.20 For WordPress 2.1.x And Above</a><br />
+				<strong>&raquo;</strong> <a href="http://lesterchan.net/others/downloads.php?id=12" title="http://lesterchan.net/others/downloads.php?id=12">WP-Print 2.30 For WordPress 2.1.x And Above</a><br />
 				<strong>&raquo;</strong> <a href="http://lesterchan.net/others/downloads/wp-print206.zip" title="http://lesterchan.net/others/downloads/wp-print206.zip">WP-Print 2.06 For WordPress 2.0.x</a><br />
 				<strong>&raquo;</strong> <a href="http://lesterchan.net/others/downloads/wp-print200a.zip" title="http://lesterchan.net/others/downloads/wp-print200a.zip">WP-Print 2.00a For WordPress 1.5.2</a>
 			</p>
@@ -269,12 +260,11 @@
 			</p>
 			<p>
 				<strong>Updated:</strong><br />
-				<strong>&raquo;</strong> 1st June 2007
+				<strong>&raquo;</strong> 1st January 2008
 			</p>
 			<p>
 				<strong>Note:</strong><br />
 				<strong>&raquo;</strong> The <strong>Changelog</strong>, <strong>Installation</strong>, <strong>Upgrade</strong>, <strong>Usage</strong> Tab at the top of the page.<br />
-				<strong>&raquo;</strong> Please go to '<strong>WP-Admin -> Options -> Print</strong>' to configure the print text link style.
 			</p>
 			<p>
 				<strong>Donations:</strong><br />
@@ -291,6 +281,16 @@
 		<div id="Changelog" style="display: none;">
 			<div class="SubTitle">&raquo; Changelog</div>
 			<ul>
+				<li>
+					<strong>Version 2.30 (01-01-2008)</strong>
+					<ul>
+						<li>NEW: Uses /wp-print/ Folder Instead Of /print/</li>
+						<li>NEW: Uses wp-print.php Instead Of print.php</li>
+						<li>NEW: Changed wp-print.php To print-posts.php</li>
+						<li>NEW: Changed wp-print-comments.php To print-comments.php</li>
+						<li>NEW: Changed wp-print-css.css To print-css.css</li>
+					</ul>
+				</li>
 				<li>
 					<strong>Version 2.20 (01-10-2007)</strong>
 					<ul>
@@ -400,7 +400,7 @@
 				</li>
 				<li>
 					Put:
-					<blockquote>Folder: print</blockquote>
+					<blockquote>Folder: wp-print</blockquote>
 				</li>
 				<li>
 					<strong>Activate</strong> WP-Print Plugin
@@ -417,7 +417,7 @@
 		<!-- Upgrade Instructions -->	
 		<div id="Upgrade" style="display: none;">
 			<div class="SubTitle">&raquo; Upgrade Instructions</div>
-			<div class="SubSubTitle">From v1.0x To v2.20</div>
+			<div class="SubSubTitle">From v2.0x To v2.30</div>
 			<ol>
 				<li>
 					<strong>Deactivate</strong> WP-Print Plugin
@@ -427,13 +427,12 @@
 				</li>
 				<li>
 					Put/Overwrite:
-					<blockquote>Folder: print</blockquote>
+					<blockquote>Folder: wp-print</blockquote>
 				</li>
 				<li>
-					Delete these files if exists:
+					Delete this folder if exists:
 					<blockquote>
-						File: wp-print.php<br />
-						File: wp-content/plugins/print.php
+						Folder: print
 					</blockquote>
 				</li>
 				<li>
@@ -469,6 +468,10 @@
 						&lt;?php if(function_exists('wp_print')) { print_link(); } ?&gt;
 					</blockquote>
 					<p>If you DO NOT want the print link to appear in every post/page, DO NOT use the code above. Just type in <strong>[print_link]</strong> into the selected post/page content and it will embed the print link into that post/page only.</p>
+					<p>The <b>first value</b> is the text for printing post.</p>
+					<p>The <b>second value</b> is the text for printing page.</p>					
+					<p>Default: print_link('', '')</p>
+					<p>Alternatively, you can set the text in 'WP-Admin -> Options -> Print'.</p>
 				</li>
 				<li>
 					Go to <strong>'WP-Admin -> Options -> Print'</strong> to configure the style of the print text link.
@@ -477,6 +480,6 @@
 		</div>
 	</div>
 </div>
-<p id="Copyright">WP-Print 2.20<br />Copyright &copy; 2007 Lester 'GaMerZ' Chan. All Rights Reserved.</p>
+<p id="Copyright">WP-Print 2.30<br />Copyright &copy; 2008 Lester 'GaMerZ' Chan. All Rights Reserved.</p>
 </body>
 </html>

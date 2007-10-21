@@ -2,7 +2,7 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.1 Plugin: WP-Print 2.20										|
+|	WordPress 2.1 Plugin: WP-Print 2.30										|
 |	Copyright (c) 2007 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
@@ -11,7 +11,7 @@
 |																							|
 |	File Information:																	|
 |	- Printer Friendly Page															|
-|	- wp-print.php																		|
+|	- wp-content/plugins/wp-print/print-posts.php							|
 |																							|
 +----------------------------------------------------------------+
 */
@@ -36,7 +36,7 @@ $print_options = get_option('print_options');
 	<title><?php bloginfo('name'); ?> <?php wp_title(); ?></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="Robots" content="noindex, nofollow" />
-	<link rel="stylesheet" href="<?php bloginfo('wpurl'); ?>/wp-content/plugins/print/wp-print-css.css" type="text/css" media="screen, print" />
+	<link rel="stylesheet" href="<?php bloginfo('wpurl'); ?>/wp-content/plugins/wp-print/print-css.css" type="text/css" media="screen, print" />
 </head>
 <body>
 <p style="text-align: center;"><strong>- <?php bloginfo('name'); ?> - <?php bloginfo('url')?> -</strong></p>

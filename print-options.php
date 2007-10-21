@@ -2,7 +2,7 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.1 Plugin: WP-Print 2.20										|
+|	WordPress 2.1 Plugin: WP-Print 2.30										|
 |	Copyright (c) 2007 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
@@ -11,52 +11,52 @@
 |																							|
 |	File Information:																	|
 |	- Print Options Page																|
-|	- wp-content/plugins/print/print-options.php								|
+|	- wp-content/plugins/wp-print/print-options.php						|
 |																							|
 +----------------------------------------------------------------+
 */
 
 
 ### Variables Variables Variables
-$base_name = plugin_basename('print/print-options.php');
+$base_name = plugin_basename('wp-print/print-options.php');
 $base_page = 'admin.php?page='.$base_name;
 $id = intval($_GET['id']);
 $mode = trim($_GET['mode']);
 $print_settings = array('print_options');
 
 
-### Form Processing 
+### Form Processing
+// Update Options
+if(!empty($_POST['Submit'])) {
+	$print_options = array();
+	$print_options['post_text'] = addslashes(trim($_POST['print_post_text']));
+	$print_options['page_text'] = addslashes(trim($_POST['print_page_text']));
+	$print_options['print_icon'] = trim($_POST['print_icon']);
+	$print_options['print_style'] = intval($_POST['print_style']);
+	$print_options['print_html'] = trim($_POST['print_html']);
+	$print_options['comments'] = intval($_POST['print_comments']);
+	$print_options['links'] = intval($_POST['print_links']);
+	$print_options['images'] = intval($_POST['print_images']);
+	$print_options['disclaimer'] = trim($_POST['print_disclaimer']);
+	$update_print_queries = array();
+	$update_print_text = array();
+	$update_print_queries[] = update_option('print_options', $print_options);
+	$update_print_text[] = __('Print Options', 'wp-print');
+	$i=0;
+	$text = '';
+	foreach($update_print_queries as $update_print_query) {
+		if($update_print_query) {
+			$text .= '<font color="green">'.$update_print_text[$i].' '.__('Updated', 'wp-print').'</font><br />';
+		}
+		$i++;
+	}
+	if(empty($text)) {
+		$text = '<font color="red">'.__('No Print Option Updated', 'wp-print').'</font>';
+	}
+}
+// Uninstall WP-Print
 if(!empty($_POST['do'])) {
-	// Decide What To Do
-	switch($_POST['do']) {
-		case __('Update Options', 'wp-print'):
-			$print_options = array();
-			$print_options['post_text'] = addslashes(trim($_POST['print_post_text']));
-			$print_options['page_text'] = addslashes(trim($_POST['print_page_text']));
-			$print_options['print_icon'] = trim($_POST['print_icon']);
-			$print_options['print_style'] = intval($_POST['print_style']);
-			$print_options['print_html'] = trim($_POST['print_html']);
-			$print_options['comments'] = intval($_POST['print_comments']);
-			$print_options['links'] = intval($_POST['print_links']);
-			$print_options['images'] = intval($_POST['print_images']);
-			$print_options['disclaimer'] = trim($_POST['print_disclaimer']);
-			$update_print_queries = array();
-			$update_print_text = array();
-			$update_print_queries[] = update_option('print_options', $print_options);
-			$update_print_text[] = __('Print Options', 'wp-print');
-			$i=0;
-			$text = '';
-			foreach($update_print_queries as $update_print_query) {
-				if($update_print_query) {
-					$text .= '<font color="green">'.$update_print_text[$i].' '.__('Updated', 'wp-print').'</font><br />';
-				}
-				$i++;
-			}
-			if(empty($text)) {
-				$text = '<font color="red">'.__('No Print Option Updated', 'wp-print').'</font>';
-			}
-			break;
-		// Uninstall WP-Print
+	switch($_POST['do']) {		
 		case __('UNINSTALL WP-Print', 'wp-print') :
 			if(trim($_POST['uninstall_print_yes']) == 'yes') {
 				echo '<div id="message" class="updated fade">';
@@ -81,14 +81,13 @@ if(!empty($_POST['do'])) {
 	}
 }
 
-
 ### Determines Which Mode It Is
 switch($mode) {
 		//  Deactivating WP-Print
 		case 'end-UNINSTALL':
-			$deactivate_url = 'plugins.php?action=deactivate&amp;plugin=print/print.php';
+			$deactivate_url = 'plugins.php?action=deactivate&amp;plugin=wp-print/wp-print.php';
 			if(function_exists('wp_nonce_url')) { 
-				$deactivate_url = wp_nonce_url($deactivate_url, 'deactivate-plugin_print/print.php');
+				$deactivate_url = wp_nonce_url($deactivate_url, 'deactivate-plugin_wp-print/wp-print.php');
 			}
 			echo '<div class="wrap">';
 			echo '<h2>'.__('Uninstall WP-Print', 'wp-print').'</h2>';
@@ -129,6 +128,9 @@ switch($mode) {
 <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>"> 
 <div class="wrap"> 
 	<h2><?php _e('Print Options', 'wp-print'); ?></h2> 
+	<p class="submit">
+		<input type="submit" name="Submit" class="button" value="<?php _e('Update Options &raquo;', 'wp-print'); ?>" />
+	</p>
 	<fieldset class="options">
 		<legend><?php _e('Print Styles', 'wp-print'); ?></legend>
 		<table width="100%"  border="0" cellspacing="3" cellpadding="3">
@@ -149,8 +151,8 @@ switch($mode) {
 				<td align="left">
 					<?php
 						$print_icon = $print_options['print_icon'];
-						$print_icon_url = get_option('siteurl').'/wp-content/plugins/print/images';
-						$print_icon_path = ABSPATH.'/wp-content/plugins/print/images';
+						$print_icon_url = get_option('siteurl').'/wp-content/plugins/wp-print/images';
+						$print_icon_path = ABSPATH.'/wp-content/plugins/wp-print/images';
 						if($handle = @opendir($print_icon_path)) {     
 							while (false !== ($filename = readdir($handle))) {  
 								if ($filename != '.' && $filename != '..') {
@@ -235,9 +237,9 @@ switch($mode) {
 			</tr>
 		</table>
 	</fieldset>
-	<div align="center">
-		<input type="submit" name="do" class="button" value="<?php _e('Update Options', 'wp-print'); ?>" />&nbsp;&nbsp;<input type="button" name="cancel" value="<?php _e('Cancel', 'wp-print'); ?>" class="button" onclick="javascript:history.go(-1)" /> 
-	</div>
+	<p class="submit">
+		<input type="submit" name="Submit" class="button" value="<?php _e('Update Options &raquo;', 'wp-print'); ?>" />
+	</p>
 </div>
 </form> 
 
