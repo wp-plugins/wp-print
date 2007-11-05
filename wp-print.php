@@ -194,8 +194,11 @@ function place_printlink($content){
 
 ### Function: Print Content
 function print_content($display = true) {
-	global $links_text, $link_number, $pages, $multipage, $numpages, $post;
+	global $links_text, $link_number, $max_link_number, $matched_links,  $pages, $multipage, $numpages, $post;
 	$max_url_char = 80;
+	if (!isset($matched_links)) {
+		$matched_links = array();
+	}
 	if(!empty($post->post_password) && stripslashes($_COOKIE['wp-postpass_'.COOKIEHASH]) != $post->post_password) {
 		$content = get_the_password_form();
 	} else {
@@ -212,10 +215,9 @@ function print_content($display = true) {
 			$content = remove_image($content);
 		}
 		if(print_can('links')) {
-			preg_match_all('/<a(.+?)href=\"(.+?)\"(.*?)>(.+?)<\/a>/', $content, $matches);
+			preg_match_all('/<a(.+?)href=[\"\'](.+?)[\"\'](.*?)>(.+?)<\/a>/', $content, $matches);
 			for ($i=0; $i < count($matches[0]); $i++) {
 				$link_match = $matches[0][$i];
-				$link_number++;
 				$link_url = $matches[2][$i];
 				if(stristr($link_url, 'https://')) {
 					 $link_url =(strtolower(substr($link_url,0,8)) != 'https://') ?get_option('home') . $link_url : $link_url;
@@ -226,15 +228,26 @@ function print_content($display = true) {
 				} else {
 					$link_url =(strtolower(substr($link_url,0,7)) != 'http://') ?get_option('home') . $link_url : $link_url;
 				}
-				$link_text = $matches[4][$i];				
-				$content = str_replace_one($link_match, '['.$link_number."] <a href=\"$link_url\" rel=\"external\">".$link_text.'</a>', $content);
-				if(strlen($link_url) > 100) {
-					$link_url = chunk_split($link_url, 100, "<br />\n");
-				}
-				if(preg_match('/<img(.+?)src=\"(.+?)\"(.*?)>/',$link_text)) {
-					$links_text .= '<br />['.$link_number.'] '.__('Image', 'wp-print').': <b>'.$link_url.'</b>';
+				$link_text = $matches[4][$i];+				
+				$new_link = true;
+				$link_url_hash = md5($link_url);
+				if (!isset($matched_links[$link_url_hash])) {
+					$link_number = ++$max_link_number;
+					$matched_links[$link_url_hash] = $link_number;
 				} else {
-					$links_text .= '<br />['.$link_number.'] '.$link_text.': <b>'.$link_url.'</b>';
+					$new_link = false;
+					$link_number = $matched_links[$link_url_hash];
+				}
+				$content = str_replace_one($link_match, '['.$link_number."] <a href=\"$link_url\" rel=\"external\">".$link_text.'</a>', $content);
+				if ($new_link) {
+					if(strlen($link_url) > 100) {
+						$link_url = chunk_split($link_url, 100, "<br />\n");
+					}
+					if(preg_match('/<img(.+?)src=[\"\'](.+?)[\"\'](.*?)>/',$link_text)) {
+						$links_text .= '<br />['.$link_number.'] '.__('Image', 'wp-print').': <b>'.$link_url.'</b>';
+					} else {
+						$links_text .= '<br />['.$link_number.'] '.$link_text.': <b>'.$link_url.'</b>';
+					}
 				}
 			}
 		}
@@ -258,17 +271,19 @@ function print_categories($before = '', $after = '') {
 
 ### Function: Print Comments Content
 function print_comments_content($display = true) {
-	global $links_text, $link_number;
+	global $links_text, $link_number, $max_link_number, $matched_links;
+	if (!isset($matched_links)) {
+		$matched_links = array();
+	}
 	$content  = get_comment_text();
 	$content = apply_filters('comment_text', $content);
 	if(!print_can('images')) {
 		$content = remove_image($content);
 	}
 	if(print_can('links')) {
-		preg_match_all('/<a(.+?)href=\"(.+?)\"(.*?)>(.+?)<\/a>/', $content, $matches);
+		preg_match_all('/<a(.+?)href=[\"\'](.+?)[\"\'](.*?)>(.+?)<\/a>/', $content, $matches);
 		for ($i=0; $i < count($matches[0]); $i++) {
 			$link_match = $matches[0][$i];
-			$link_number++;
 			$link_url = $matches[2][$i];
 			if(stristr($link_url, 'https://')) {
 				 $link_url =(strtolower(substr($link_url,0,8)) != 'https://') ?get_option('home') . $link_url : $link_url;
@@ -279,15 +294,25 @@ function print_comments_content($display = true) {
 			} else {
 				$link_url =(strtolower(substr($link_url,0,7)) != 'http://') ?get_option('home') . $link_url : $link_url;
 			}
-			$link_text = $matches[4][$i];
-			$content = str_replace_one($link_match, '['.$link_number."] <a href=\"$link_url\" rel=\"external\">".$link_text.'</a>', $content);
-			if(strlen($link_url) > 100) {
-				$link_url = chunk_split($link_url, 100, "<br />\n");
-			}
-			if(preg_match('/<img(.+?)src=\"(.+?)\"(.*?)>/',$link_text)) {
-				$links_text .= '<br />['.$link_number.'] '.__('Image', 'wp-print').': <b>'.$link_url.'</b>';
+			$new_link = true;
+			$link_url_hash = md5($link_url);
+			if (!isset($matched_links[$link_url_hash])) {
+				$link_number = ++$max_link_number;
+				$matched_links[$link_url_hash] = $link_number;
 			} else {
-				$links_text .= '<br />['.$link_number.'] '.$link_text.': <b>'.$link_url.'</b>';
+				$new_link = false;
+				$link_number = $matched_links[$link_url_hash];
+			}
+			$content = str_replace_one($link_match, '['.$link_number."] <a href=\"$link_url\" rel=\"external\">".$link_text.'</a>', $content);
+			if ($new_link) {
+				if(strlen($link_url) > 100) {
+					$link_url = chunk_split($link_url, 100, "<br />\n");
+				}
+				if(preg_match('/<img(.+?)src=[\"\'](.+?)[\"\'](.*?)>/',$link_text)) {
+					$links_text .= '<br />['.$link_number.'] '.__('Image', 'wp-print').': <b>'.$link_url.'</b>';
+				} else {
+					$links_text .= '<br />['.$link_number.'] '.$link_text.': <b>'.$link_url.'</b>';
+				}
 			}
 		}
 	}
@@ -368,7 +393,7 @@ function print_can($type) {
 
 ### Function: Remove Image From Text
 function remove_image($content) {
-	$content= preg_replace('/<img(.+?)src=\"(.+?)\"(.*?)>/', '',$content);
+	$content= preg_replace('/<img(.+?)src=[\"\'](.+?)[\"\'](.*?)>/', '',$content);
 	return $content;
 }
 
