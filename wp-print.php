@@ -10,7 +10,7 @@ Author URI: http://lesterchan.net
 
 
 /*  
-	Copyright 2007  Lester Chan  (email : gamerz84@hotmail.com)
+	Copyright 2008  Lester Chan  (email : gamerz84@hotmail.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -57,7 +57,7 @@ function print_rewrite($wp_rewrite) {
 		$print_link_text = 'print';
 	}
 	$rewrite_rules = $wp_rewrite->generate_rewrite_rule($wp_rewrite->permalink_structure.$print_link_text, EP_PERMALINK);
-	array_splice($rewrite_rules, 1);
+	$rewrite_rules = array_slice($rewrite_rules, 4, 1);
 	$r_rule = array_keys($rewrite_rules);
 	$r_rule = array_shift($r_rule);
 	$r_rule = str_replace('/trackback', '',$r_rule);
@@ -72,7 +72,7 @@ function print_rewrite($wp_rewrite) {
 		foreach ($uris as $uri => $pagename) {			
 			$wp_rewrite->add_rewrite_tag('%pagename%', "($uri)", 'pagename=');
 			$rewrite_rules = $wp_rewrite->generate_rewrite_rules($wp_rewrite->get_page_permastruct().'/printpage', EP_PAGES);
-			array_splice($rewrite_rules, 1);
+			$rewrite_rules = array_slice($rewrite_rules, 4, 1);
 			$r_rule = array_keys($rewrite_rules);
 			$r_rule = array_shift($r_rule);
 			$r_rule = str_replace('/trackback', '',$r_rule);
