@@ -10,7 +10,7 @@ Author URI: http://lesterchan.net
 
 
 /*  
-	Copyright 2008  Lester Chan  (email : gamerz84@hotmail.com)
+	Copyright 2008  Lester Chan  (email : lesterchan@gmail.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -173,22 +173,14 @@ function print_link($print_post_text = '', $print_page_text = '', $echo = true) 
 }
 
 
-### Function: Display Print Image Link (Deprecated)
-function print_link_image() {
-	print_link();
-}
-
-
-### Function: Place Print Link
-add_filter('the_content', 'place_printlink', 7);
-add_filter('the_excerpt', 'place_printlink', 7);
-function place_printlink($content){
+### Function: Short Code For Inserting Prink Links Into Posts/Pages
+add_shortcode('print_link', 'print_link_shortcode');
+function print_link_shortcode($atts) {
 	if(!is_feed()) {
-		 $content = str_replace("[print_link]", print_link('', '', false), $content);
+		return print_link('', '', false);
 	} else {
-		$content = str_replace("[print_link]", __('Note: There is a print link embedded within this post, please visit this post to print it.', 'wp-print'), $content);
-	}   
-	return $content;
+		return __('Note: There is a print link embedded within this post, please visit this post to print it.', 'wp-print');
+	}
 }
 
 
@@ -213,6 +205,9 @@ function print_content($display = true) {
 		$content = str_replace(']]>', ']]&gt;', $content);
 		if(!print_can('images')) {
 			$content = remove_image($content);
+		}
+		if(!print_can('videos')) {
+			$content = remove_video($content);
 		}
 		if(print_can('links')) {
 			preg_match_all('/<a(.+?)href=[\"\'](.+?)[\"\'](.*?)>(.+?)<\/a>/', $content, $matches);
@@ -279,6 +274,9 @@ function print_comments_content($display = true) {
 	$content = apply_filters('comment_text', $content);
 	if(!print_can('images')) {
 		$content = remove_image($content);
+	}
+	if(!print_can('videos')) {
+		$content = remove_video($content);
 	}
 	if(print_can('links')) {
 		preg_match_all('/<a(.+?)href=[\"\'](.+?)[\"\'](.*?)>(.+?)<\/a>/', $content, $matches);
@@ -398,6 +396,13 @@ function remove_image($content) {
 }
 
 
+### Function: Remove Video From Text
+function remove_video($content) {
+	$content= preg_replace('/<object[^>]*?>.*?<\/object>/', '',$content);
+	return $content;
+}
+
+
 ### Function: Replace One Time Only
 function str_replace_one($search, $replace, $content){
 	if ($pos = strpos($content, $search)) {
@@ -421,7 +426,9 @@ function print_init() {
 	$print_options['comments'] = 0;
 	$print_options['links'] = 1;
 	$print_options['images'] = 1;
+	$print_options['videos'] = 0;
 	$print_options['disclaimer'] = sprintf(__('Copyright &copy; %s %s. All rights reserved.', 'wp-print'), date('Y'), get_option('blogname'));
+	$print_options['text_direction'] = 'ltr';
 	add_option('print_options', $print_options, 'Print Options');
 }
 ?>

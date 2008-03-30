@@ -29,6 +29,16 @@ add_filter('comments_template', 'print_template_comments');
 
 ### Print Options
 $print_options = get_option('print_options');
+
+### Determine Text Direction
+$text_direction = 'ltr';
+$text_align = 'left';
+$text_align_opposite = 'right';
+if($print_options['text_direction'] == 'rtl') {
+	$text_direction = 'rtl';
+	$text_align = 'right';
+	$text_align_opposite = 'left';
+}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -36,6 +46,16 @@ $print_options = get_option('print_options');
 	<title><?php bloginfo('name'); ?> <?php wp_title(); ?></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="Robots" content="noindex, nofollow" />
+	<style type="text/css" media="screen, print">
+		BODY {
+			direction: <?php echo $text_direction; ?>;
+			text-align: <?php echo $text_align; ?>;
+		}
+		#Outline {
+			direction: <?php echo $text_direction; ?>;
+			text-align: <?php echo $text_align; ?>;
+		}
+	</style>
 	<link rel="stylesheet" href="<?php bloginfo('wpurl'); ?>/wp-content/plugins/wp-print/print-css.css" type="text/css" media="screen, print" />
 </head>
 <body>
@@ -52,14 +72,14 @@ $print_options = get_option('print_options');
 			<?php if(print_can('comments')): ?>
 				<?php comments_template(); ?>
 			<?php endif; ?>
-			<p style="text-align: left;"><?php _e('Article printed from', 'wp-print'); ?> <?php bloginfo('name'); ?>: <strong><?php bloginfo('url'); ?></strong></p>
-			<p style="text-align: left;"><?php _e('URL to article', 'wp-print'); ?>: <strong><?php the_permalink(); ?></strong></p>
+			<p style="text-align: <?php echo $text_direction; ?>;"><?php _e('Article printed from', 'wp-print'); ?> <?php bloginfo('name'); ?>: <strong><?php bloginfo('url'); ?></strong></p>
+			<p style="text-align: <?php echo $text_direction; ?>;"><?php _e('URL to article', 'wp-print'); ?>: <strong><?php the_permalink(); ?></strong></p>
 			<?php if(print_can('links')): ?>
-				<p style="text-align: left;"><?php print_links(); ?></p>
+				<p style="text-align: <?php echo $text_direction; ?>;"><?php print_links(); ?></p>
 			<?php endif; ?>
-			<p style="text-align: right;" id="print-link"><?php _e('Click', 'wp-print'); ?> <a href="#Print" onclick="window.print(); return false;" title="<?php _e('Click here to print.', 'wp-print'); ?>"><?php _e('here', 'wp-print'); ?></a> <?php _e('to print.', 'wp-print'); ?></p>
+			<p style="text-align: <?php echo $text_align_opposite; ?>;" id="print-link"><?php _e('Click', 'wp-print'); ?> <a href="#Print" onclick="window.print(); return false;" title="<?php _e('Click here to print.', 'wp-print'); ?>"><?php _e('here', 'wp-print'); ?></a> <?php _e('to print.', 'wp-print'); ?></p>
 		<?php else: ?>
-				<p style="text-align: left;"><?php _e('No posts matched your criteria.', 'wp-print'); ?></p>
+				<p style="text-align: <?php echo $text_direction; ?>;"><?php _e('No posts matched your criteria.', 'wp-print'); ?></p>
 		<?php endif; ?>
 	</div>
 </center>

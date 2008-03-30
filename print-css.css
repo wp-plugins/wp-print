@@ -20,8 +20,6 @@ Body {
 	font-family: Verdana, Arial, Tahoma;
 	font-size: 12px;
 	color: #000000;
-	direction: ltr;
-	text-align: left;
 }
 #Outline {
 	width: 90%;
@@ -29,8 +27,6 @@ Body {
 	margin-right: auto;
 	padding: 10px;
 	border: 1px solid #000000;
-	direction: ltr;
-	text-align: left;
 }
 #BlogTitle {
 	font-weight: bold;
