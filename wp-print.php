@@ -66,7 +66,8 @@ function print_rewrite($wp_rewrite) {
 	$r_link = str_replace('tb=1', 'print=1', $r_link);
 	$wp_rewrite->rules = array_merge(array($r_rule => $r_link), $wp_rewrite->rules);
 	// Print Rules For Pages
-	$uris = get_option('page_uris');
+	$page_uris = $wp_rewrite->page_uri_index();
+	$uris = $page_uris[0];
 	if(is_array($uris)) {
 		$print_page_rules = array();
 		foreach ($uris as $uri => $pagename) {			

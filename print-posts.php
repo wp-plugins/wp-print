@@ -56,7 +56,11 @@ if($print_options['text_direction'] == 'rtl') {
 			text-align: <?php echo $text_align; ?>;
 		}
 	</style>
-	<link rel="stylesheet" href="<?php bloginfo('wpurl'); ?>/wp-content/plugins/wp-print/print-css.css" type="text/css" media="screen, print" />
+	<?php if(@file_exists(get_template_directory().'/print-css.css')): ?>
+		<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/print-css.css" type="text/css" media="screen, print" />
+	<?php else: ?>
+		<link rel="stylesheet" href="<?php bloginfo('wpurl'); ?>/wp-content/plugins/wp-print/print-css.css" type="text/css" media="screen, print" />
+	<?php endif; ?>
 </head>
 <body>
 <p style="text-align: center;"><strong>- <?php bloginfo('name'); ?> - <?php bloginfo('url')?> -</strong></p>
