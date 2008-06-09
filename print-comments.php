@@ -2,7 +2,7 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.5 Plugin: WP-Print 2.30										|
+|	WordPress 2.5 Plugin: WP-Print 2.31										|
 |	Copyright (c) 2008 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
@@ -10,12 +10,14 @@
 |	- http://lesterchan.net															|
 |																							|
 |	File Information:																	|
-|	- Printer Friendly Page For Comments										|
+|	- Printer Friendly Comments Template										|
 |	- wp-content/plugins/wp-print/print-comments.php					|
 |																							|
 +----------------------------------------------------------------+
 */
 ?>
+
+
 <?php if($comments) : ?>
 	<?php $comment_count = 1; ?>
 	<span style='float:right' id='comments_controls'><?php print_comments_number(); ?> (<a  href="#" onclick="javascript:document.getElementById('comments_box').style.display = 'block'; return false;"><?php _e('Open', 'wp-print'); ?></a> | <a href="#" onclick="javascript:document.getElementById('comments_box').style.display = 'none'; return false;"><?php _e('Close', 'wp-print'); ?></a>)</span>

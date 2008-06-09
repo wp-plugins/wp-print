@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WP-Print 2.30\n"
+"Project-Id-Version: WP-Print 2.31\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-13 00:46+0800\n"
-"PO-Revision-Date: 2008-05-13 00:46+0800\n"
+"POT-Creation-Date: 2008-06-09 16:26+0800\n"
+"PO-Revision-Date: 2008-06-09 16:26+0800\n"
 "Last-Translator: Lester Chan <lesterchan@gmail.com>\n"
 "Language-Team: Lester Chan <lesterchan@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -15,46 +15,46 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: print-comments.php:21
+#: print-comments.php:23
 msgid "Open"
 msgstr ""
 
-#: print-comments.php:21
+#: print-comments.php:23
 msgid "Close"
 msgstr ""
 
-#: print-comments.php:23
+#: print-comments.php:25
 msgid "To"
 msgstr ""
 
-#: print-comments.php:26
+#: print-comments.php:28
 msgid "Comment"
 msgstr ""
 
-#: print-comments.php:26
+#: print-comments.php:28
 msgid "Trackback"
 msgstr ""
 
-#: print-comments.php:26
+#: print-comments.php:28
 msgid "Pingback"
 msgstr ""
 
-#: print-comments.php:26
+#: print-comments.php:28
 msgid "By"
 msgstr ""
 
-#: print-comments.php:26
-#: print-posts.php:72
+#: print-comments.php:28
+#: print-posts.php:50
 msgid "On"
 msgstr ""
 
-#: print-comments.php:26
-#: print-posts.php:72
+#: print-comments.php:28
+#: print-posts.php:50
 #, php-format
 msgid "%s @ %s"
 msgstr ""
 
-#: print-comments.php:30
+#: print-comments.php:32
 msgid "Your comment is awaiting moderation."
 msgstr ""
 
@@ -98,7 +98,7 @@ msgid "<a href=\"%s\">Click Here</a> To Finish The Uninstallation And WP-Print W
 msgstr ""
 
 #: print-options.php:122
-#: wp-print.php:431
+#: wp-print.php:435
 #, php-format
 msgid "Copyright &copy; %s %s. All rights reserved."
 msgstr ""
@@ -240,39 +240,39 @@ msgid ""
 " Choose [Cancel] To Stop, [OK] To Uninstall."
 msgstr ""
 
-#: print-posts.php:72
+#: print-posts.php:50
 msgid "Posted By"
 msgstr ""
 
-#: print-posts.php:72
+#: print-posts.php:50
 msgid "In"
 msgstr ""
 
-#: print-posts.php:79
+#: print-posts.php:57
 msgid "Article printed from"
 msgstr ""
 
-#: print-posts.php:80
+#: print-posts.php:58
 msgid "URL to article"
 msgstr ""
 
-#: print-posts.php:84
+#: print-posts.php:62
 msgid "Click"
 msgstr ""
 
-#: print-posts.php:84
+#: print-posts.php:62
 msgid "Click here to print."
 msgstr ""
 
-#: print-posts.php:84
+#: print-posts.php:62
 msgid "here"
 msgstr ""
 
-#: print-posts.php:84
+#: print-posts.php:62
 msgid "to print."
 msgstr ""
 
-#: print-posts.php:86
+#: print-posts.php:64
 msgid "No posts matched your criteria."
 msgstr ""
 
@@ -314,11 +314,11 @@ msgstr ""
 msgid "URLs in this post:"
 msgstr ""
 
-#: wp-print.php:422
+#: wp-print.php:426
 msgid "Print This Post"
 msgstr ""
 
-#: wp-print.php:423
+#: wp-print.php:427
 msgid "Print This Page"
 msgstr ""
 

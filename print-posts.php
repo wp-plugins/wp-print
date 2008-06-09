@@ -2,7 +2,7 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.5 Plugin: WP-Print 2.30										|
+|	WordPress 2.5 Plugin: WP-Print 2.31										|
 |	Copyright (c) 2008 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
@@ -10,36 +10,14 @@
 |	- http://lesterchan.net															|
 |																							|
 |	File Information:																	|
-|	- Printer Friendly Page															|
+|	- Printer Friendly Post/Page Template										|
 |	- wp-content/plugins/wp-print/print-posts.php							|
 |																							|
 +----------------------------------------------------------------+
 */
-
-
-### Variables
-$links_text = '';
-
-### Actions
-add_action('init', 'print_content');
-
-### Filters
-add_filter('wp_title', 'print_pagetitle');
-add_filter('comments_template', 'print_template_comments');
-
-### Print Options
-$print_options = get_option('print_options');
-
-### Determine Text Direction
-$text_direction = 'ltr';
-$text_align = 'left';
-$text_align_opposite = 'right';
-if($print_options['text_direction'] == 'rtl') {
-	$text_direction = 'rtl';
-	$text_align = 'right';
-	$text_align_opposite = 'left';
-}
 ?>
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -64,7 +42,7 @@ if($print_options['text_direction'] == 'rtl') {
 </head>
 <body>
 <p style="text-align: center;"><strong>- <?php bloginfo('name'); ?> - <?php bloginfo('url')?> -</strong></p>
-<center>
+<div class="Center">
 	<div id="Outline">
 		<?php if (have_posts()): ?>
 			<?php while (have_posts()): the_post(); ?>
@@ -86,7 +64,7 @@ if($print_options['text_direction'] == 'rtl') {
 				<p style="text-align: <?php echo $text_direction; ?>;"><?php _e('No posts matched your criteria.', 'wp-print'); ?></p>
 		<?php endif; ?>
 	</div>
-</center>
+</div>
 <p style="text-align: center;"><?php echo stripslashes($print_options['disclaimer']); ?></p>
 </body>
 </html>

@@ -3,7 +3,7 @@
 Plugin Name: WP-Print
 Plugin URI: http://lesterchan.net/portfolio/programming.php
 Description: Displays a printable version of your WordPress blog's post/page.
-Version: 2.30
+Version: 2.31
 Author: Lester 'GaMerZ' Chan
 Author URI: http://lesterchan.net
 */
@@ -364,7 +364,7 @@ function print_links($text_links = '') {
 add_action('template_redirect', 'wp_print');
 function wp_print() {
 	if(intval(get_query_var('print')) == 1 || intval(get_query_var('printpage')) == 1) {
-		include(ABSPATH.'wp-content/plugins/wp-print/print-posts.php');
+		include(ABSPATH.'wp-content/plugins/wp-print/print.php');
 		exit;
 	}
 }
@@ -372,7 +372,11 @@ function wp_print() {
 
 ### Function: Add Print Comments Template
 function print_template_comments($file = '') {
-	$file = ABSPATH.'wp-content/plugins/wp-print/print-comments.php';
+	if(file_exists(TEMPLATEPATH.'/print-comments.php')) {
+		$file = TEMPLATEPATH.'/print-comments.php';
+	} else {
+		$file = ABSPATH.'wp-content/plugins/wp-print/print-comments.php';
+	}
 	return $file;
 }
 
