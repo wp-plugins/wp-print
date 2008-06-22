@@ -119,7 +119,7 @@ switch($mode) {
 				default_template = '<a href="%PRINT_URL%" rel="nofollow" title="%PRINT_TEXT%">%PRINT_TEXT%</a>';
 				break;
 			case 'disclaimer':
-				default_template = '<?php printf(__('Copyright &copy; %s %s. All rights reserved.', 'wp-print'), date('Y'), get_option('blogname')); ?>';
+				default_template = '<?php echo js_escape(sprintf(__('Copyright &copy; %s %s. All rights reserved.', 'wp-print'), date('Y'), get_option('blogname'))); ?>';
 				break;
 		}
 		document.getElementById("print_template_" + template).value = default_template;
