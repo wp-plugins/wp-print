@@ -149,8 +149,8 @@ switch($mode) {
 			<td>
 				<?php
 					$print_icon = $print_options['print_icon'];
-					$print_icon_url = get_option('siteurl').'/wp-content/plugins/wp-print/images';
-					$print_icon_path = ABSPATH.'/wp-content/plugins/wp-print/images';
+					$print_icon_url =WP_PLUGIN_URL.'/wp-print/images';
+					$print_icon_path = WP_PLUGIN_DIR.'/wp-print/images';
 					if($handle = @opendir($print_icon_path)) {     
 						while (false !== ($filename = readdir($handle))) {  
 							if ($filename != '.' && $filename != '..') {

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-Print 2.31\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-23 04:08+0800\n"
-"PO-Revision-Date: 2008-06-23 04:08+0800\n"
+"POT-Creation-Date: 2008-07-03 01:03+0800\n"
+"PO-Revision-Date: 2008-07-03 01:03+0800\n"
 "Last-Translator: Lester Chan <lesterchan@gmail.com>\n"
 "Language-Team: Lester Chan <lesterchan@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -98,7 +98,7 @@ msgid "<a href=\"%s\">Click Here</a> To Finish The Uninstallation And WP-Print W
 msgstr ""
 
 #: print-options.php:122
-#: wp-print.php:435
+#: wp-print.php:466
 #, php-format
 msgid "Copyright &copy; %s %s. All rights reserved."
 msgstr ""
@@ -276,49 +276,49 @@ msgstr ""
 msgid "No posts matched your criteria."
 msgstr ""
 
-#: wp-print.php:42
+#: wp-print.php:61
 msgid "Print"
 msgstr ""
 
-#: wp-print.php:183
+#: wp-print.php:202
 msgid "Note: There is a print link embedded within this post, please visit this post to print it."
 msgstr ""
 
-#: wp-print.php:243
-#: wp-print.php:311
+#: wp-print.php:274
+#: wp-print.php:342
 msgid "Image"
 msgstr ""
 
-#: wp-print.php:334
+#: wp-print.php:365
 msgid "No Comments"
 msgstr ""
 
-#: wp-print.php:336
+#: wp-print.php:367
 msgid "1 Comment"
 msgstr ""
 
-#: wp-print.php:338
+#: wp-print.php:369
 #, php-format
 msgid "%s Comments"
 msgstr ""
 
-#: wp-print.php:341
+#: wp-print.php:372
 msgid "Comments Disabled"
 msgstr ""
 
-#: wp-print.php:344
+#: wp-print.php:375
 msgid "Comments Hidden"
 msgstr ""
 
-#: wp-print.php:355
+#: wp-print.php:386
 msgid "URLs in this post:"
 msgstr ""
 
-#: wp-print.php:426
+#: wp-print.php:457
 msgid "Print This Post"
 msgstr ""
 
-#: wp-print.php:427
+#: wp-print.php:458
 msgid "Print This Page"
 msgstr ""
 

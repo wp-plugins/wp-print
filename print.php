@@ -44,6 +44,6 @@ if($print_options['text_direction'] == 'rtl') {
 if(file_exists(TEMPLATEPATH.'/print-posts.php')) {
 	include(TEMPLATEPATH.'/print-posts.php');
 } else {
-	include(ABSPATH.'wp-content/plugins/wp-print/print-posts.php');
+	include(WP_PLUGIN_DIR.'/wp-print/print-posts.php');
 }
 ?>

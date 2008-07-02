@@ -28,10 +28,29 @@ Author URI: http://lesterchan.net
 */
 
 
+### Use WordPress 2.6 Constants
+if (!defined('WP_CONTENT_DIR')) {
+	define( 'WP_CONTENT_DIR', ABSPATH.'wp-content');
+}
+if (!defined('WP_CONTENT_URL')) {
+	define('WP_CONTENT_URL', get_option('siteurl').'/wp-content');
+}
+if (!defined('WP_PLUGIN_DIR')) {
+	define('WP_PLUGIN_DIR', WP_CONTENT_DIR.'/plugins');
+}
+if (!defined('WP_PLUGIN_URL')) {
+	define('WP_PLUGIN_URL', WP_CONTENT_URL.'/plugins');
+}
+
+
 ### Create Text Domain For Translations
 add_action('init', 'print_textdomain');
 function print_textdomain() {
-	load_plugin_textdomain('wp-print', 'wp-content/plugins/wp-print');
+	if (!function_exists('wp_print_styles')) {
+		load_plugin_textdomain('wp-print', 'wp-content/plugins/wp-print');
+	} else {
+		load_plugin_textdomain('wp-print', false, 'wp-print');
+	}
 }
 
 
@@ -112,7 +131,7 @@ function print_link($print_post_text = '', $print_page_text = '', $echo = true) 
 	} else {
 		$print_text  = $print_post_text;
 	}
-	$print_icon = get_option('siteurl').'/wp-content/plugins/wp-print/images/'.$print_options['print_icon'];
+	$print_icon = WP_PLUGIN_URL.'/wp-print/images/'.$print_options['print_icon'];
 	$print_link = get_permalink();
 	$print_html = stripslashes($print_options['print_html']);
 	// Fix For Static Page
@@ -185,6 +204,16 @@ function print_link_shortcode($atts) {
 }
 
 
+### Function: Short Code For DO NOT PRINT Content
+add_shortcode('donotprint', 'print_donotprint_shortcode');
+function print_donotprint_shortcode($atts, $content = null) {
+	return $content;
+}
+function print_donotprint_shortcode2($atts, $content = null) {
+	return;
+}
+
+
 ### Function: Print Content
 function print_content($display = true) {
 	global $links_text, $link_number, $max_link_number, $matched_links,  $pages, $multipage, $numpages, $post;
@@ -202,6 +231,8 @@ function print_content($display = true) {
 		} else {
 			$content = $pages[0];
 		}
+		remove_shortcode('donotprint', 'print_donotprint_shortcode');
+		add_shortcode('donotprint', 'print_donotprint_shortcode2');
 		$content = apply_filters('the_content', $content);
 		$content = str_replace(']]>', ']]&gt;', $content);
 		if(!print_can('images')) {
@@ -364,7 +395,7 @@ function print_links($text_links = '') {
 add_action('template_redirect', 'wp_print');
 function wp_print() {
 	if(intval(get_query_var('print')) == 1 || intval(get_query_var('printpage')) == 1) {
-		include(ABSPATH.'wp-content/plugins/wp-print/print.php');
+		include(WP_PLUGIN_DIR.'/wp-print/print.php');
 		exit;
 	}
 }
@@ -375,7 +406,7 @@ function print_template_comments($file = '') {
 	if(file_exists(TEMPLATEPATH.'/print-comments.php')) {
 		$file = TEMPLATEPATH.'/print-comments.php';
 	} else {
-		$file = ABSPATH.'wp-content/plugins/wp-print/print-comments.php';
+		$file = WP_PLUGIN_DIR.'/wp-print/print-comments.php';
 	}
 	return $file;
 }

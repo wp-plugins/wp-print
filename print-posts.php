@@ -37,7 +37,7 @@
 	<?php if(@file_exists(TEMPLATEPATH.'/print-css.css')): ?>
 		<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/print-css.css" type="text/css" media="screen, print" />
 	<?php else: ?>
-		<link rel="stylesheet" href="<?php bloginfo('wpurl'); ?>/wp-content/plugins/wp-print/print-css.css" type="text/css" media="screen, print" />
+		<link rel="stylesheet" href="<?php echo WP_PLUGIN_URL; ?>/wp-print/print-css.css" type="text/css" media="screen, print" />
 	<?php endif; ?>
 </head>
 <body>
