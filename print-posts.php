@@ -2,7 +2,7 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.5 Plugin: WP-Print 2.31										|
+|	WordPress 2.6 Plugin: WP-Print 2.40										|
 |	Copyright (c) 2008 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
@@ -37,7 +37,7 @@
 	<?php if(@file_exists(TEMPLATEPATH.'/print-css.css')): ?>
 		<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/print-css.css" type="text/css" media="screen, print" />
 	<?php else: ?>
-		<link rel="stylesheet" href="<?php echo WP_PLUGIN_URL; ?>/wp-print/print-css.css" type="text/css" media="screen, print" />
+		<link rel="stylesheet" href="<?php echo plugins_url('wp-print/print-css.css'); ?>" type="text/css" media="screen, print" />
 	<?php endif; ?>
 </head>
 <body>

@@ -3,7 +3,7 @@
 Plugin Name: WP-Print
 Plugin URI: http://lesterchan.net/portfolio/programming/php/
 Description: Displays a printable version of your WordPress blog's post/page.
-Version: 2.31
+Version: 2.40
 Author: Lester 'GaMerZ' Chan
 Author URI: http://lesterchan.net
 */
@@ -28,29 +28,10 @@ Author URI: http://lesterchan.net
 */
 
 
-### Use WordPress 2.6 Constants
-if (!defined('WP_CONTENT_DIR')) {
-	define( 'WP_CONTENT_DIR', ABSPATH.'wp-content');
-}
-if (!defined('WP_CONTENT_URL')) {
-	define('WP_CONTENT_URL', get_option('siteurl').'/wp-content');
-}
-if (!defined('WP_PLUGIN_DIR')) {
-	define('WP_PLUGIN_DIR', WP_CONTENT_DIR.'/plugins');
-}
-if (!defined('WP_PLUGIN_URL')) {
-	define('WP_PLUGIN_URL', WP_CONTENT_URL.'/plugins');
-}
-
-
 ### Create Text Domain For Translations
 add_action('init', 'print_textdomain');
 function print_textdomain() {
-	if (!function_exists('wp_print_styles')) {
-		load_plugin_textdomain('wp-print', 'wp-content/plugins/wp-print');
-	} else {
-		load_plugin_textdomain('wp-print', false, 'wp-print');
-	}
+	load_plugin_textdomain('wp-print', false, 'wp-print');
 }
 
 
@@ -131,7 +112,7 @@ function print_link($print_post_text = '', $print_page_text = '', $echo = true) 
 	} else {
 		$print_text  = $print_post_text;
 	}
-	$print_icon = WP_PLUGIN_URL.'/wp-print/images/'.$print_options['print_icon'];
+	$print_icon = plugins_url('wp-print/images/'.$print_options['print_icon']);
 	$print_link = get_permalink();
 	$print_html = stripslashes($print_options['print_html']);
 	// Fix For Static Page
@@ -363,10 +344,8 @@ function print_comments_number() {
 		$num_comments = get_comments_number();
 		if($num_comments == 0) {
 			$comment_text = __('No Comments', 'wp-print');
-		} elseif($num_comments == 1) {
-			$comment_text = __('1 Comment', 'wp-print');
 		} else {
-			$comment_text = sprintf(__('%s Comments', 'wp-print'), $num_comments);
+			$comment_text = sprintf(__ngettext('%s Comment', '%s Comments', $num_comments, 'wp-print'), $num_comments);
 		}
 	} else {
 		$comment_text = __('Comments Disabled', 'wp-print');

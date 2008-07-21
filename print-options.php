@@ -2,7 +2,7 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.5 Plugin: WP-Print 2.31										|
+|	WordPress 2.6 Plugin: WP-Print 2.40										|
 |	Copyright (c) 2008 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
@@ -149,7 +149,7 @@ switch($mode) {
 			<td>
 				<?php
 					$print_icon = $print_options['print_icon'];
-					$print_icon_url =WP_PLUGIN_URL.'/wp-print/images';
+					$print_icon_url = plugins_url('wp-print/images');
 					$print_icon_path = WP_PLUGIN_DIR.'/wp-print/images';
 					if($handle = @opendir($print_icon_path)) {     
 						while (false !== ($filename = readdir($handle))) {  
