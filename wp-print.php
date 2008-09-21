@@ -198,7 +198,6 @@ function print_donotprint_shortcode2($atts, $content = null) {
 ### Function: Print Content
 function print_content($display = true) {
 	global $links_text, $link_number, $max_link_number, $matched_links,  $pages, $multipage, $numpages, $post;
-	$max_url_char = 80;
 	if (!isset($matched_links)) {
 		$matched_links = array();
 	}
@@ -246,15 +245,12 @@ function print_content($display = true) {
 					$new_link = false;
 					$link_number = $matched_links[$link_url_hash];
 				}
-				$content = str_replace_one($link_match, '['.$link_number."] <a href=\"$link_url\" rel=\"external\">".$link_text.'</a>', $content);
+				$content = str_replace_one($link_match, "<a href=\"$link_url\" rel=\"external\">".$link_text.'</a> <sup>['.number_format_i18n($link_number).']</sup>', $content);
 				if ($new_link) {
-					if(strlen($link_url) > 100) {
-						$link_url = chunk_split($link_url, 100, "<br />\n");
-					}
 					if(preg_match('/<img(.+?)src=[\"\'](.+?)[\"\'](.*?)>/',$link_text)) {
-						$links_text .= '<br />['.$link_number.'] '.__('Image', 'wp-print').': <b>'.$link_url.'</b>';
+						$links_text .= '<p style="margin: 2px 0;">['.number_format_i18n($link_number).'] '.__('Image', 'wp-print').': <b><span dir="ltr">'.$link_url.'</span></b></p>';
 					} else {
-						$links_text .= '<br />['.$link_number.'] '.$link_text.': <b>'.$link_url.'</b>';
+						$links_text .= '<p style="margin: 2px 0;">['.number_format_i18n($link_number).'] '.$link_text.': <b><span dir="ltr">'.$link_url.'</span></b></p>';
 					}
 				}
 			}
@@ -270,9 +266,9 @@ function print_content($display = true) {
 
 ### Function: Print Categories
 function print_categories($before = '', $after = '') {
-	$temp_cat = strip_tags(get_the_category_list(',' , $parents));
+	$temp_cat = strip_tags(get_the_category_list(',', $parents));
 	$temp_cat = explode(', ', $temp_cat);
-	$temp_cat = implode($after.', '.$before, $temp_cat);
+	$temp_cat = implode($after.__(',', 'wp-print').' '.$before, $temp_cat);
 	echo $before.$temp_cat.$after;
 }
 
@@ -314,15 +310,12 @@ function print_comments_content($display = true) {
 				$new_link = false;
 				$link_number = $matched_links[$link_url_hash];
 			}
-			$content = str_replace_one($link_match, '['.$link_number."] <a href=\"$link_url\" rel=\"external\">".$link_text.'</a>', $content);
+			$content = str_replace_one($link_match, "<a href=\"$link_url\" rel=\"external\">".$link_text.'</a> <sup>['.number_format_i18n($link_number).']</sup>', $content);
 			if ($new_link) {
-				if(strlen($link_url) > 100) {
-					$link_url = chunk_split($link_url, 100, "<br />\n");
-				}
 				if(preg_match('/<img(.+?)src=[\"\'](.+?)[\"\'](.*?)>/',$link_text)) {
-					$links_text .= '<br />['.$link_number.'] '.__('Image', 'wp-print').': <b>'.$link_url.'</b>';
+					$links_text .= '<p style="margin: 2px 0;">['.number_format_i18n($link_number).'] '.__('Image', 'wp-print').': <b><span dir="ltr">'.$link_url.'</span></b></p>';
 				} else {
-					$links_text .= '<br />['.$link_number.'] '.$link_text.': <b>'.$link_url.'</b>';
+					$links_text .= '<p style="margin: 2px 0;">['.number_format_i18n($link_number).'] '.$link_text.': <b><span dir="ltr">'.$link_url.'</span></b></p>';
 				}
 			}
 		}
@@ -345,7 +338,7 @@ function print_comments_number() {
 		if($num_comments == 0) {
 			$comment_text = __('No Comments', 'wp-print');
 		} else {
-			$comment_text = sprintf(__ngettext('%s Comment', '%s Comments', $num_comments, 'wp-print'), $num_comments);
+			$comment_text = sprintf(__ngettext('%s Comment', '%s Comments', $num_comments, 'wp-print'), number_format_i18n($num_comments));
 		}
 	} else {
 		$comment_text = __('Comments Disabled', 'wp-print');
@@ -392,8 +385,9 @@ function print_template_comments($file = '') {
 
 
 ### Function: Print Page Title
-function print_pagetitle($print_pagetitle) {
-	return '&raquo; Print'.$print_pagetitle;
+function print_pagetitle($page_title) {
+	$page_title .= ' &raquo; '.__('Print', 'wp-print');
+	return $page_title;
 }
 
 
@@ -431,6 +425,7 @@ function str_replace_one($search, $replace, $content){
 ### Function: Print Options
 add_action('activate_wp-print/wp-print.php', 'print_init');
 function print_init() {
+	print_textdomain();
 	// Add Options
 	$print_options = array();
 	$print_options['post_text'] = __('Print This Post', 'wp-print');
@@ -443,7 +438,6 @@ function print_init() {
 	$print_options['images'] = 1;
 	$print_options['videos'] = 0;
 	$print_options['disclaimer'] = sprintf(__('Copyright &copy; %s %s. All rights reserved.', 'wp-print'), date('Y'), get_option('blogname'));
-	$print_options['text_direction'] = 'ltr';
 	add_option('print_options', $print_options, 'Print Options');
 }
 ?>

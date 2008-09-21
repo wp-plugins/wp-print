@@ -38,7 +38,6 @@ if(!empty($_POST['Submit'])) {
 	$print_options['links'] = intval($_POST['print_links']);
 	$print_options['images'] = intval($_POST['print_images']);
 	$print_options['videos'] = intval($_POST['print_videos']);
-	$print_options['text_direction'] = trim($_POST['print_text_direction']);
 	$print_options['disclaimer'] = trim($_POST['print_disclaimer']);
 	$update_print_queries = array();
 	$update_print_text = array();
@@ -155,6 +154,7 @@ switch($mode) {
 						while (false !== ($filename = readdir($handle))) {  
 							if ($filename != '.' && $filename != '..') {
 								if(is_file($print_icon_path.'/'.$filename)) {
+									echo '<p>';
 									if($print_icon == $filename) {
 										echo '<input type="radio" name="print_icon" value="'.$filename.'" checked="checked" />'."\n";										
 									} else {
@@ -163,7 +163,7 @@ switch($mode) {
 									echo '&nbsp;&nbsp;&nbsp;';
 									echo '<img src="'.$print_icon_url.'/'.$filename.'" alt="'.$filename.'" />'."\n";
 									echo '&nbsp;&nbsp;&nbsp;('.$filename.')';
-									echo '<br /><br />'."\n";
+									echo '</p>'."\n";
 								}
 							} 
 						} 
@@ -231,15 +231,6 @@ switch($mode) {
 			</td> 
 		</tr>
 		<tr> 
-			<th scope="row" valign="top"><?php _e('Text Direction?', 'wp-print'); ?></th>
-			<td>
-				<select name="print_text_direction" size="1">
-					<option value="ltr"<?php selected('ltr', $print_options['text_direction']); ?>><?php _e('Left To Right', 'wp-print'); ?></option>
-					<option value="rtl"<?php selected('rtl', $print_options['text_direction']); ?>><?php _e('Right To Left', 'wp-print'); ?></option>
-				</select>
-			</td> 
-		</tr>
-		<tr> 
 			<th scope="row" valign="top">				
 				<?php _e('Disclaimer/Copyright Text?', 'wp-print'); ?>
 				<br /><br />
@@ -261,14 +252,14 @@ switch($mode) {
 <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>"> 
 <div class="wrap"> 
 	<h2><?php _e('Uninstall WP-Print', 'wp-print'); ?></h2>
-	<p style="text-align: left;">
+	<p>
 		<?php _e('Deactivating WP-Print plugin does not remove any data that may have been created, such as the print options. To completely remove this plugin, you can uninstall it here.', 'wp-print'); ?>
 	</p>
-	<p style="text-align: left; color: red">
+	<p style="color: red">
 		<strong><?php _e('WARNING:', 'wp-print'); ?></strong><br />
 		<?php _e('Once uninstalled, this cannot be undone. You should use a Database Backup plugin of WordPress to back up all the data first.', 'wp-print'); ?>
 	</p>
-	<p style="text-align: left; color: red">
+	<p style="color: red">
 		<strong><?php _e('The following WordPress Options will be DELETED:', 'wp-print'); ?></strong><br />
 	</p>
 	<table class="widefat">

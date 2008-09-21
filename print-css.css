@@ -62,6 +62,7 @@ HR.Divider {
 	padding: 2px 10px 10px 10px;
 }
 @media print {
+    #comments_controls,
     #print-link {
         display: none;
     }
