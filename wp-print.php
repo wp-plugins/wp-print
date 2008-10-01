@@ -408,6 +408,7 @@ function remove_image($content) {
 ### Function: Remove Video From Text
 function remove_video($content) {
 	$content= preg_replace('/<object[^>]*?>.*?<\/object>/', '',$content);
+	$content= preg_replace('/<embed[^>]*?>.*?<\/embed>/', '',$content);
 	return $content;
 }
 
