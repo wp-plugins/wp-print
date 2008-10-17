@@ -183,6 +183,9 @@ function print_link_shortcode($atts) {
 		return __('Note: There is a print link embedded within this post, please visit this post to print it.', 'wp-print');
 	}
 }
+function print_link_shortcode2($atts) {
+	return;
+}
 
 
 ### Function: Short Code For DO NOT PRINT Content
@@ -213,6 +216,8 @@ function print_content($display = true) {
 		}
 		remove_shortcode('donotprint', 'print_donotprint_shortcode');
 		add_shortcode('donotprint', 'print_donotprint_shortcode2');
+		remove_shortcode('print_link', 'print_link_shortcode');
+		add_shortcode('print_link', 'print_link_shortcode2');
 		$content = apply_filters('the_content', $content);
 		$content = str_replace(']]>', ']]&gt;', $content);
 		if(!print_can('images')) {
