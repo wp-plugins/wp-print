@@ -57,7 +57,7 @@ function print_rewrite($wp_rewrite) {
 		$print_link_text = 'print';
 	}
 	$rewrite_rules = $wp_rewrite->generate_rewrite_rule($wp_rewrite->permalink_structure.$print_link_text, EP_PERMALINK);
-	$rewrite_rules = array_slice($rewrite_rules, 4, 1);
+	$rewrite_rules = array_slice($rewrite_rules, 5, 1);
 	$r_rule = array_keys($rewrite_rules);
 	$r_rule = array_shift($r_rule);
 	$r_rule = str_replace('/trackback', '',$r_rule);
@@ -73,7 +73,7 @@ function print_rewrite($wp_rewrite) {
 		foreach ($uris as $uri => $pagename) {			
 			$wp_rewrite->add_rewrite_tag('%pagename%', "($uri)", 'pagename=');
 			$rewrite_rules = $wp_rewrite->generate_rewrite_rules($wp_rewrite->get_page_permastruct().'/printpage', EP_PAGES);
-			$rewrite_rules = array_slice($rewrite_rules, 4, 1);
+			$rewrite_rules = array_slice($rewrite_rules, 5, 1);
 			$r_rule = array_keys($rewrite_rules);
 			$r_rule = array_shift($r_rule);
 			$r_rule = str_replace('/trackback', '',$r_rule);
@@ -369,7 +369,7 @@ function print_links($text_links = '') {
 
 
 ### Function: Load WP-Print
-add_action('template_redirect', 'wp_print');
+add_action('template_redirect', 'wp_print', 5);
 function wp_print() {
 	if(intval(get_query_var('print')) == 1 || intval(get_query_var('printpage')) == 1) {
 		include(WP_PLUGIN_DIR.'/wp-print/print.php');
