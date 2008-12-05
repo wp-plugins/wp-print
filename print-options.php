@@ -128,6 +128,7 @@ switch($mode) {
 <?php if(!empty($text)) { echo '<!-- Last Action --><div id="message" class="updated fade"><p>'.$text.'</p></div>'; } ?>
 <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>"> 
 <div class="wrap"> 
+	<?php screen_icon(); ?>
 	<h2><?php _e('Print Options', 'wp-print'); ?></h2> 
 	<h3><?php _e('Print Styles', 'wp-print'); ?></h3>
 	<table class="form-table">
@@ -251,7 +252,7 @@ switch($mode) {
 <!-- Uninstall WP-Print -->
 <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>"> 
 <div class="wrap"> 
-	<h2><?php _e('Uninstall WP-Print', 'wp-print'); ?></h2>
+	<h3><?php _e('Uninstall WP-Print', 'wp-print'); ?></h3>
 	<p>
 		<?php _e('Deactivating WP-Print plugin does not remove any data that may have been created, such as the print options. To completely remove this plugin, you can uninstall it here.', 'wp-print'); ?>
 	</p>
