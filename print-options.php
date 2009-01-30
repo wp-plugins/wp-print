@@ -2,7 +2,7 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.6 Plugin: WP-Print 2.40										|
+|	WordPress 2.7 Plugin: WP-Print 2.50										|
 |	Copyright (c) 2008 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
@@ -102,12 +102,11 @@ switch($mode) {
 <script type="text/javascript">
 	/* <![CDATA[*/
 	function check_print_style() {
-		print_style_options = document.getElementById("print_style").value;
-		if (print_style_options == 4) {
-				document.getElementById("print_style_custom").style.display = 'block';
+		if (parseInt(jQuery("#print_style").val()) == 4) {
+				jQuery("#print_style_custom").show();
 		} else {
-			if(document.getElementById("print_style_custom").style.display == 'block') {
-				document.getElementById("print_style_custom").style.display = 'none';
+			if(jQuery("#print_style_custom").is(":visible")) {
+				jQuery("#print_style_custom").hide();
 			}
 		}
 	}
@@ -121,7 +120,7 @@ switch($mode) {
 				default_template = '<?php echo js_escape(sprintf(__('Copyright &copy; %s %s. All rights reserved.', 'wp-print'), date('Y'), get_option('blogname'))); ?>';
 				break;
 		}
-		document.getElementById("print_template_" + template).value = default_template;
+		jQuery("#print_template_" + template).val(default_template);
 	}
 	/* ]]> */
 </script>
