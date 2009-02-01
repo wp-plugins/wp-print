@@ -214,9 +214,13 @@ function print_content($display = true) {
 		} else {
 			$content = $pages[0];
 		}
-		remove_shortcode('donotprint', 'print_donotprint_shortcode');
+		if(function_exists('email_rewrite')) {
+			remove_shortcode('donotemail');
+			add_shortcode('donotemail', 'email_donotemail_shortcode2');
+		}
+		remove_shortcode('donotprint');
 		add_shortcode('donotprint', 'print_donotprint_shortcode2');
-		remove_shortcode('print_link', 'print_link_shortcode');
+		remove_shortcode('print_link');
 		add_shortcode('print_link', 'print_link_shortcode2');
 		$content = apply_filters('the_content', $content);
 		$content = str_replace(']]>', ']]&gt;', $content);
