@@ -191,7 +191,7 @@ function print_link_shortcode2($atts) {
 ### Function: Short Code For DO NOT PRINT Content
 add_shortcode('donotprint', 'print_donotprint_shortcode');
 function print_donotprint_shortcode($atts, $content = null) {
-	return $content;
+	return do_shortcode($content);
 }
 function print_donotprint_shortcode2($atts, $content = null) {
 	return;
