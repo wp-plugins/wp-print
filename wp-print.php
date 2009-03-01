@@ -347,7 +347,7 @@ function print_comments_number() {
 		if($num_comments == 0) {
 			$comment_text = __('No Comments', 'wp-print');
 		} else {
-			$comment_text = sprintf(__ngettext('%s Comment', '%s Comments', $num_comments, 'wp-print'), number_format_i18n($num_comments));
+			$comment_text = sprintf(_n('%s Comment', '%s Comments', $num_comments, 'wp-print'), number_format_i18n($num_comments));
 		}
 	} else {
 		$comment_text = __('Comments Disabled', 'wp-print');
