@@ -67,3 +67,11 @@ HR.Divider {
         display: none;
     }
 }
+.alignleft, div.alignleft {
+	float: left;
+	margin: 10px 10px 5px 0;
+}
+.alignright, div.alignright {
+	float: right;
+	margin: 10px 0 5px 10px;
+}
