@@ -29,8 +29,8 @@ $print_settings = array('print_options');
 // Update Options
 if(!empty($_POST['Submit'])) {
 	$print_options = array();
-	$print_options['post_text'] = addslashes(trim($_POST['print_post_text']));
-	$print_options['page_text'] = addslashes(trim($_POST['print_page_text']));
+	$print_options['post_text'] = addslashes(trim(wp_filter_kses($_POST['print_post_text'])));
+	$print_options['page_text'] = addslashes(trim(wp_filter_kses($_POST['print_page_text'])));
 	$print_options['print_icon'] = trim($_POST['print_icon']);
 	$print_options['print_style'] = intval($_POST['print_style']);
 	$print_options['print_html'] = trim($_POST['print_html']);
