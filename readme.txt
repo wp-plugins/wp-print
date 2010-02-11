@@ -1,5 +1,5 @@
 === WP-Print ===
-Contributors: GamerZ
+Contributors: aaroncampbell,GamerZ
 Donate link: http://lesterchan.net/wordpress
 Tags: print, printer, wp-print
 Requires at least: 2.8
