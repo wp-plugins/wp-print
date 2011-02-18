@@ -1,6 +1,6 @@
 === WP-Print ===
 Contributors: aaroncampbell,GamerZ
-Donate link: http://lesterchan.net/wordpress
+Donate link: http://lesterchan.net/site/donation/
 Tags: print, printer, wp-print
 Requires at least: 2.8
 Stable tag: 2.50
