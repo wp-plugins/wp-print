@@ -36,6 +36,7 @@
 			<link rel="stylesheet" href="<?php echo plugins_url('wp-print/print-css-rtl.css'); ?>" type="text/css" media="screen, print" />
 		<?php endif; ?>
 	<?php endif; ?>
+	<link rel="canonical" href="<?php the_permalink(); ?>" />
 </head>
 <body>
 <p style="text-align: center;"><strong>- <?php bloginfo('name'); ?> - <span dir="ltr"><?php bloginfo('url')?></span> -</strong></p>
