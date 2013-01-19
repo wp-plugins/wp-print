@@ -104,7 +104,7 @@ if(function_exists('wp_print')) {
 
 == Changelog ==
 
-= 2.61 =
+= 2.51 =
 * FIXED: Unable to load WP-Print on Password Protected posts
 
 = 2.50 =
