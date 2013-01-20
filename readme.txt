@@ -105,6 +105,7 @@ if(function_exists('wp_print')) {
 == Changelog ==
 
 = 2.51 =
+* NEW: Support for links that start with "//"
 * FIXED: Unable to load WP-Print on Password Protected posts
 
 = 2.50 =
@@ -200,7 +201,7 @@ if(function_exists('wp_print')) {
 
 = 2.01 =
 * NEW: Compatible With WordPress 2.0
-* NEW: Automatically Detect Whether You Are Using Nice Permalink	
+* NEW: Automatically Detect Whether You Are Using Nice Permalink
 * NEW: Automated Permalink
 * NEW: Now You Only Need To Insert 1 Line Into Your index.php Of Your Theme
 * NEW: GPL License Added
