@@ -104,6 +104,9 @@ if(function_exists('wp_print')) {
 
 == Changelog ==
 
+= 2.52 =
+* FIXED: Added nonce to Options. Credits to Charlie Eriksen via Secunia SVCRP.
+
 = 2.51 =
 * NEW: Support for links that start with "//"
 * FIXED: Unable to load WP-Print on Password Protected posts
