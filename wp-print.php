@@ -6,6 +6,7 @@ Description: Displays a printable version of your WordPress blog's post/page.
 Version: 2.52
 Author: Lester 'GaMerZ' Chan
 Author URI: http://lesterchan.net
+Text Domain: wp-print
 */
 
 
