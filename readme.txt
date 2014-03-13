@@ -1,10 +1,10 @@
 === WP-Print ===
-Contributors: GamerZ, aaroncampbell
-Donate link: http://lesterchan.net/site/donation/
-Tags: print, printer, wp-print
-Requires at least: 2.8
-Tested up to: 3.5.1
-Stable tag: trunk
+Contributors: GamerZ  
+Donate link: http://lesterchan.net/site/donation/  
+Tags: print, printer, wp-print  
+Requires at least: 2.8  
+Tested up to: 3.8  
+Stable tag: 2.52  
 
 Displays a printable version of your WordPress blog's post/page.
 
@@ -81,7 +81,7 @@ Once installed take the following steps to set it up:
 1. Find: `<?php while (have_posts()) : the_post(); ?>`
 1. Add Anywhere Below It: `<?php if(function_exists('wp_print')) { print_link(); } ?>`
 
-Simply add this code <strong>inside the loop = where you want the print link to display:
+Simply add this code <strong>inside the loop ### where you want the print link to display:
 <code>
 if(function_exists('wp_print')) {
 	print_link();
@@ -103,6 +103,9 @@ if(function_exists('wp_print')) {
 
 
 == Changelog ==
+
+= 2.53 =
+* FIXED: Use get_stylesheet_directory() instead of TEMPLATEPATH
 
 = 2.52 =
 * FIXED: Added nonce to Options. Credits to Charlie Eriksen via Secunia SVCRP.
