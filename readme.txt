@@ -3,8 +3,8 @@ Contributors: GamerZ
 Donate link: http://lesterchan.net/site/donation/  
 Tags: print, printer, wp-print  
 Requires at least: 2.8  
-Tested up to: 4.1  
-Stable tag: 2.55  
+Tested up to: 4.2
+Stable tag: 2.56  
 
 Displays a printable version of your WordPress blog's post/page.
 
@@ -24,7 +24,7 @@ Displays a printable version of your WordPress blog's post/page.
 * Icons courtesy of [FamFamFam](http://www.famfamfam.com/)
 
 = Donations =
-I spent most of my free time creating, updating, maintaining and supporting these plugins, if you really love my plugins and could spare me a couple of bucks as my school allowance, I will really appreciate it. If not feel free to use it without any obligations. Thank You. My Paypal account is lesterchan@gmail.com.
+I spent most of my free time creating, updating, maintaining and supporting these plugins, if you really love my plugins and could spare me a couple of bucks as my school allowance, I will really appreciate it. If not feel free to use it without any obligations.
 
 == Installation ==
 
@@ -41,8 +41,7 @@ Once installed take the following steps to set it up:
 
 = Usage =
 
-1. Open `wp-content/themes/<YOUR THEME NAME>/index.php`
-      You may place it in single.php, post.php, page.php, etc also.
+1. Open `wp-content/themes/<YOUR THEME NAME>/index.php`. You should place it in single.php, post.php, page.php, etc also if they exist.
 1. Find: `<?php while (have_posts()) : the_post(); ?>`
 1. Add Anywhere Below It: `<?php if(function_exists('wp_print')) { print_link(); } ?>`
 
@@ -68,7 +67,7 @@ Once installed take the following steps to set it up:
 1. Find: `<?php while (have_posts()) : the_post(); ?>`
 1. Add Anywhere Below It: `<?php if(function_exists('wp_print')) { print_link(); } ?>`
 
-Simply add this code <strong>inside the loop ### where you want the print link to display:
+Simply add this code inside the loop ### where you want the print link to display:
 <code>
 if(function_exists('wp_print')) {
 	print_link();
@@ -84,12 +83,14 @@ if(function_exists('wp_print')) {
 * Do note that if you are using WP-Email, any text within [donotprint][/donotprint] will not be emailed as well.
 
 = Custom Template =
-* WP-Print will load 'print-css.css', '<strong>print-posts.php' and 'print-comments.php' from your theme's directory if it exists.
+* WP-Print will load 'print-css.css', 'print-posts.php' and 'print-comments.php' from your theme's directory if it exists.
 * If it doesn't exists, it will just load the respective default file that comes with WP-Print.
 * This will allow you to upgrade WP-Print without worrying about overwriting your printing styles or templates that you have created.
 
 
 == Changelog ==
+= 2.66 =
+* NEW: Updated print HTML code. Props @Luanramos
 
 = 2.55 =
 * NEW: Bump to 4.1
